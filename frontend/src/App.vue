@@ -11,7 +11,6 @@
         가계부
       </v-toolbar-title>
     </v-app-bar>
-
     <v-content>
       <router-view></router-view>
     </v-content>
@@ -21,9 +20,13 @@
 <script>
 export default {
   name: 'App',
-
   data: () => ({
     //
   }),
+  methods: {
+    signIn() {
+      this.$router.push('/signin');
+    },
+  },
 };
 </script>

@@ -1,16 +1,19 @@
 <template>
   <div>
-    <List/>
+    <SignIn/>
   </div>
 </template>
 
 <script>
-import List from '../components/home/List.vue';
+import SignIn from '../components/signin/SignIn.vue';
 
 export default {
-  name: 'home',
   components: {
-    List,
+    SignIn,
   },
 };
 </script>
+
+<style>
+
+</style>
