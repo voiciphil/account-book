@@ -4,6 +4,28 @@
       justify="center"
       class="mt-5"
     >
+      <v-col cols="3">
+        <v-radio-group
+          v-model="radio"
+          row
+        >
+          <v-radio
+            label="전체"
+            color="indigo darken-3"
+            value="0"
+          ></v-radio>
+          <v-radio
+            label="수입"
+            color="indigo darken-3"
+            value="1"
+          ></v-radio>
+          <v-radio
+            label="지출"
+            color="indigo darken-3"
+            value="2"
+          ></v-radio>
+        </v-radio-group>
+      </v-col>
       <v-col cols="2">
         <v-menu
           v-model="menu"
@@ -31,23 +53,6 @@
             color="indigo darken-3"
           ></v-date-picker>
         </v-menu>
-      </v-col>
-      <v-col cols="2">
-        <v-radio-group
-          v-model="radio"
-          row
-        >
-          <v-radio
-            label="수입"
-            color="indigo darken-3"
-            value="0"
-          ></v-radio>
-          <v-radio
-            label="지출"
-            color="indigo darken-3"
-            value="1"
-          ></v-radio>
-        </v-radio-group>
       </v-col>
     </v-row>
   </div>
