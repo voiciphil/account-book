@@ -14,6 +14,13 @@
           class="pa-n3"
           fluid
         >
+          <v-row
+            justify="center"
+          >
+            <v-text
+              class="headline"
+            >로그인</v-text>
+          </v-row>
           <v-row class="ml-3 mr-10 mt-7">
             <v-text-field
               color="indigo darken-3"
