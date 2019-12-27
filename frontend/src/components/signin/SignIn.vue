@@ -5,7 +5,7 @@
       justify="center"
     >
       <v-card
-        width="500px"
+        width="400px"
         height="300px"
         color="grey lighten-5"
         outlined
@@ -18,26 +18,24 @@
             justify="center"
           >
           </v-row>
-          <v-row class="ml-3 mr-10 mt-7">
+          <v-row class="mx-10 mt-7">
             <v-text-field
               v-model="id"
               v-on:keyup.enter="login"
               width="250px"
               color="indigo darken-3"
               label="아이디"
-              prepend-icon="mdi-account"
               outlined
               dense
             ></v-text-field>
           </v-row>
-          <v-row class="ml-3 mr-10">
+          <v-row class="mx-10">
             <v-text-field
               v-model="pw"
               v-on:keyup.enter="login"
               color="indigo darken-3"
               label="비밀번호"
               type="password"
-              prepend-icon="mdi-lock"
               outlined
               dense
             ></v-text-field>
@@ -51,6 +49,7 @@
               color="indigo darken-3"
               dark
               rounded
+              outlined
             >로그인</v-btn>
           </v-row>
         </v-container>

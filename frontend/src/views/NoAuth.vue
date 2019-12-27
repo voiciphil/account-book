@@ -1,16 +1,16 @@
 <template>
   <div>
-    <SignIn/>
+    <NoAuth/>
   </div>
 </template>
 
 <script>
-import SignIn from '../components/signin/SignIn.vue';
+import NoAuth from '../components/noauth/NoAuth.vue';
 
 export default {
-  name: 'signin',
+  name: 'noauth',
   components: {
-    SignIn,
+    NoAuth,
   },
 };
 </script>
