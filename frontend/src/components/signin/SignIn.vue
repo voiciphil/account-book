@@ -59,8 +59,6 @@
 </template>
 
 <script>
-import axios from 'axios';
-
 export default {
   data() {
     return {
@@ -70,7 +68,7 @@ export default {
   },
   methods: {
     async login() {
-      const res = await axios.post('http://localhost:3000/api/auth/login', {
+      const res = await this.$axios.post('http://localhost:3000/api/auth/login', {
         id: this.id,
         pw: Buffer.from(this.pw).toString('base64'),
       });
