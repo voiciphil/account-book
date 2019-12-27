@@ -76,6 +76,7 @@ export default {
         pw: Buffer.from(this.pw).toString('base64'),
       });
       if (res.data.message === 'login success') {
+        this.$store.commit('setToken', res.data.token);
         this.$router.push('/home');
       }
     },
