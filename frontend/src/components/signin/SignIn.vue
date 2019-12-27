@@ -17,25 +17,29 @@
           <v-row
             justify="center"
           >
-            <v-text
-              class="headline"
-            >로그인</v-text>
           </v-row>
           <v-row class="ml-3 mr-10 mt-7">
             <v-text-field
+              v-model="id"
+              v-on:keyup.enter="login"
+              width="250px"
               color="indigo darken-3"
               label="아이디"
               prepend-icon="mdi-account"
               outlined
+              dense
             ></v-text-field>
           </v-row>
           <v-row class="ml-3 mr-10">
             <v-text-field
+              v-model="pw"
+              v-on:keyup.enter="login"
               color="indigo darken-3"
               label="비밀번호"
               type="password"
               prepend-icon="mdi-lock"
               outlined
+              dense
             ></v-text-field>
           </v-row>
           <v-row
@@ -43,10 +47,10 @@
             justify="center"
           >
             <v-btn
+              v-on:click="login"
               color="indigo darken-3"
               dark
               rounded
-              large
             >로그인</v-btn>
           </v-row>
         </v-container>
@@ -56,8 +60,26 @@
 </template>
 
 <script>
-export default {
+import axios from 'axios';
 
+export default {
+  data() {
+    return {
+      id: '',
+      pw: '',
+    };
+  },
+  methods: {
+    async login() {
+      const res = await axios.post('http://localhost:3000/api/auth/login', {
+        id: this.id,
+        pw: Buffer.from(this.pw).toString('base64'),
+      });
+      if (res.data.message === 'login success') {
+        this.$router.push('/home');
+      }
+    },
+  },
 };
 </script>
 
