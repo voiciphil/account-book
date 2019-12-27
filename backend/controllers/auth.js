@@ -37,3 +37,18 @@ exports.login = async (req, res, next) => {
     });
   }
 };
+
+exports.verify = (req, res, next) => {
+  const { token } = req.body;
+
+  try {
+    jwt.verify(token, process.env.SECRETE_KEY);
+    res.json({
+      verified: true,
+    });
+  } catch {
+    res.json({
+      verified: false,
+    });
+  }
+}
