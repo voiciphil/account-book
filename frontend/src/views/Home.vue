@@ -1,7 +1,5 @@
 <template>
-  <div
-    v-if="auth"
-  >
+  <div>
     <List/>
   </div>
 </template>
