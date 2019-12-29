@@ -4,32 +4,30 @@
       class="mt-10"
       justify="center"
     >
-      <v-card
-        width="400px"
-        height="300px"
-        color="grey lighten-5"
-        outlined
+      <v-container
+        class="pa-n3"
+        fluid
       >
-        <v-container
-          class="pa-n3"
-          fluid
+        <v-row
+          class="mx-10 mt-7"
+          justify="center"
         >
-          <v-row
-            justify="center"
-          >
-          </v-row>
-          <v-row class="mx-10 mt-7">
+          <v-col cols="3">
             <v-text-field
               v-model="id"
               v-on:keyup.enter="login"
-              width="250px"
               color="indigo darken-3"
               label="아이디"
               outlined
               dense
             ></v-text-field>
-          </v-row>
-          <v-row class="mx-10">
+          </v-col>
+        </v-row>
+        <v-row
+          class="mx-10 mt-n5"
+          justify="center"
+        >
+          <v-col cols="3">
             <v-text-field
               v-model="pw"
               v-on:keyup.enter="login"
@@ -39,21 +37,21 @@
               outlined
               dense
             ></v-text-field>
-          </v-row>
-          <v-row
-            class="mx-10"
-            justify="center"
-          >
-            <v-btn
-              v-on:click="login"
-              color="indigo darken-3"
-              dark
-              rounded
-              outlined
-            >로그인</v-btn>
-          </v-row>
-        </v-container>
-      </v-card>
+          </v-col>
+        </v-row>
+        <v-row
+          class="mx-10"
+          justify="center"
+        >
+          <v-btn
+            v-on:click="login"
+            color="indigo darken-3"
+            dark
+            rounded
+            outlined
+          >로그인</v-btn>
+        </v-row>
+      </v-container>
     </v-row>
   </v-container>
 </template>
@@ -73,7 +71,7 @@ export default {
         pw: Buffer.from(this.pw).toString('base64'),
       });
       if (res.data.message === 'login success') {
-        this.$store.commit('setToken', res.data.token);
+        localStorage.token = res.data.token;
         this.$router.push('/home');
       }
     },

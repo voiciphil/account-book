@@ -1,7 +1,6 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import axios from 'axios';
-import store from '../store';
 import Home from '../views/Home.vue';
 import NoAuth from '../views/NoAuth.vue';
 import SignIn from '../views/SignIn.vue';
@@ -11,7 +10,7 @@ Vue.use(VueRouter);
 
 const verify = async (to, from, next) => {
   const res = await axios.post('http://localhost:3000/api/auth/verify', {
-    token: store.getters.getToken,
+    token: localStorage.token,
   });
   if (!res.data.verified) {
     next('/noauth');
