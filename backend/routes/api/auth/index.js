@@ -9,4 +9,8 @@ router.post('/verify', (req, res, next) => {
   controller.auth.verify(req, res, next);
 });
 
+router.post('/signup', (req, res, next) => {
+  controller.auth.signup(req, res, next);
+})
+
 module.exports = router;

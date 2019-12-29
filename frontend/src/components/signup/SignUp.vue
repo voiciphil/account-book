@@ -73,8 +73,17 @@ export default {
     };
   },
   methods: {
-    signUp() {
+    async signUp() {
+      if (this.pw === this.repw) {
+        const res = await this.$axios.post('http://localhost:3000/api/auth/signup', {
+          id: this.id,
+          pw: this.pw,
+        });
 
+        if (res.data.success) {
+          this.$router.push('/');
+        }
+      }
     },
   },
 };

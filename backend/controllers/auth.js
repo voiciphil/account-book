@@ -51,4 +51,22 @@ exports.verify = (req, res, next) => {
       verified: false,
     });
   }
+};
+
+exports.signup = (req, res, next) => {
+  const { id, pw } = req.body;
+
+  try {
+    db.users.create({
+      user_id: id,
+      user_pw: pw,
+    });
+    res.json({
+      success: true,
+    });
+  } catch {
+    res.json({
+      success: false,
+    });
+  }
 }
