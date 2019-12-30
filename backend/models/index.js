@@ -11,5 +11,6 @@ db.seq = seq;
 db.sequelize = sequelize;
 
 db.users = require('./users')(seq, sequelize);
+db.transactions = require('./transactions')(seq, sequelize);
 
 module.exports = db;
