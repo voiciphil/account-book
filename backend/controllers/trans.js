@@ -27,4 +27,25 @@ exports.all = async (req, res, next) => {
       message: err.toString(),
     })
   }
-}
+};
+
+exports.add = (req, res, next) => {
+  const { token, date, breakdown, price } = req.body;
+  const payload = jwt.verify(token, process.env.SECRETE_KEY);
+
+  try {
+    db.transactions.create({
+      user_id: payload.user_id,
+      date: date,
+      breakdown: breakdown,
+      price: price,
+    });
+    res.json({
+      success: true,
+    });
+  } catch {
+    res.json({
+      success: false,
+    });
+  }
+};
