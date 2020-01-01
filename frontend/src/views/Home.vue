@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import List from '../components/home/List.vue';
+import List from '../components/home/Filter.vue';
 
 export default {
   name: 'home',

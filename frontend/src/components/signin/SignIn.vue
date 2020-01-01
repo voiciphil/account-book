@@ -12,7 +12,7 @@
           label="아이디"
           outlined
           dense
-        ></v-text-field>
+        />
       </v-col>
     </v-row>
     <v-row
@@ -28,7 +28,7 @@
           type="password"
           outlined
           dense
-        ></v-text-field>
+        />
       </v-col>
     </v-row>
     <v-row
@@ -59,6 +59,7 @@
 
 <script>
 export default {
+  name: 'SignIn',
   data() {
     return {
       id: '',

@@ -15,7 +15,7 @@ exports.all = async (req, res, next) => {
     const result = [];
     transactions.forEach((item) => {
       result.push(item.dataValues);
-    })
+    });
 
     res.json({
       data: result,
@@ -44,6 +44,26 @@ exports.add = (req, res, next) => {
       success: true,
     });
   } catch {
+    res.json({
+      success: false,
+    });
+  }
+};
+
+exports.delete = (req, res, next) => {
+  const { id } = req.body;
+
+  try {
+    db.transactions.delete({
+      where: {
+        id: id,
+      },
+    });
+    res.json({
+      success: true,
+    });
+  }
+  catch {
     res.json({
       success: false,
     });

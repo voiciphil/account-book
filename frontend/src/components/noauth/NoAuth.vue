@@ -28,6 +28,7 @@
 
 <script>
 export default {
+  name: 'NoAuth',
   methods: {
     home() {
       this.$router.push('/');
