@@ -54,16 +54,16 @@ exports.delete = (req, res, next) => {
   const { id } = req.body;
 
   try {
-    db.transactions.delete({
+    db.transactions.destroy({
       where: {
-        id: id,
+        id: parseInt(id),
       },
     });
     res.json({
       success: true,
     });
   }
-  catch {
+  catch (err) {
     res.json({
       success: false,
     });
