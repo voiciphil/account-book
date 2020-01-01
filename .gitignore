@@ -105,6 +105,3 @@ dist
 
 #DB config files
 db-config.json
-
-#IntelliJ
-.idea/
