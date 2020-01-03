@@ -2,7 +2,7 @@ const db = require('../models');
 const jwt = require('jsonwebtoken');
 require('dotenv').config();
 
-exports.login = async (req, res, next) => {
+exports.signIn = async (req, res, next) => {
   let { id, pw } = req.body;
   pw = Buffer.from(pw, 'base64').toString('ascii');
 
@@ -53,7 +53,7 @@ exports.verify = (req, res, next) => {
   }
 };
 
-exports.signup = (req, res, next) => {
+exports.signUp = (req, res, next) => {
   const { id, pw } = req.body;
 
   try {

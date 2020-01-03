@@ -76,7 +76,7 @@ export default {
   methods: {
     async signUp() {
       if (this.pw === this.repw) {
-        const res = await this.$axios.post('http://localhost:3000/api/auth/signup', {
+        const res = await this.$axios.post('http://localhost:3000/api/auth/sign-up', {
           id: this.id,
           pw: this.pw,
         });

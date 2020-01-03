@@ -68,7 +68,7 @@ export default {
   },
   methods: {
     async login() {
-      const res = await this.$axios.post('http://localhost:3000/api/auth/login', {
+      const res = await this.$axios.post('http://localhost:3000/api/auth/sign-in', {
         id: this.id,
         pw: Buffer.from(this.pw).toString('base64'),
       });
@@ -78,7 +78,7 @@ export default {
       }
     },
     signUp() {
-      this.$router.push('/signup');
+      this.$router.push('/sign-up');
     },
   },
 };

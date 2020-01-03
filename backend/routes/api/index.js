@@ -1,8 +1,10 @@
 const router = require('express').Router();
 const auth = require('./auth');
-const trans = require('./trans');
+const transactions = require('./transactions');
+const categories = require('./categories');
 
 router.use('/auth', auth);
-router.use('/trans', trans);
+router.use('/transactions', transactions);
+router.use('/categories', categories);
 
 module.exports = router;

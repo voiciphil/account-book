@@ -8,7 +8,7 @@
 import NoAuth from '../components/noauth/NoAuth.vue';
 
 export default {
-  name: 'noauth',
+  name: 'NoAuth',
   components: {
     NoAuth,
   },

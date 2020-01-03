@@ -12,20 +12,15 @@ exports.all = async (req, res, next) => {
       },
     });
 
-    const result = [];
-    transactions.forEach((item) => {
-      result.push(item.dataValues);
-    });
-
     res.json({
-      data: result,
+      data: transactions,
       message: 'success',
     });
   } catch (err) {
     res.json({
       data: [],
       message: err.toString(),
-    })
+    });
   }
 };
 

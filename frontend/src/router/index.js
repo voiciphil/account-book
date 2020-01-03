@@ -13,7 +13,7 @@ const verify = async (to, from, next) => {
     token: localStorage.token,
   });
   if (!res.data.verified) {
-    next('/noauth');
+    next('/no-auth');
   } else {
     next();
   }
@@ -22,23 +22,23 @@ const verify = async (to, from, next) => {
 const routes = [
   {
     path: '/',
-    name: 'signin',
+    name: 'SignIn',
     component: SignIn,
   },
   {
     path: '/home',
-    name: 'home',
+    name: 'Home',
     component: Home,
     beforeEnter: verify,
   },
   {
-    path: '/noauth',
-    name: 'noauth',
+    path: '/no-auth',
+    name: 'NoAuth',
     component: NoAuth,
   },
   {
-    path: '/signup',
-    name: 'signup',
+    path: '/sign-up',
+    name: 'SignUp',
     component: SignUp,
   },
 ];
