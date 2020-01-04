@@ -8,7 +8,6 @@
 import SignIn from '../components/signin/SignIn.vue';
 
 export default {
-  name: 'SignIn',
   components: {
     SignIn,
   },

@@ -12,7 +12,7 @@
       </v-toolbar-title>
     </v-app-bar>
     <v-content>
-      <router-view></router-view>
+      <router-view/>
     </v-content>
   </v-app>
 </template>
@@ -23,10 +23,5 @@ export default {
   data: () => ({
     //
   }),
-  methods: {
-    signIn() {
-      this.$router.push('/signin');
-    },
-  },
 };
 </script>
