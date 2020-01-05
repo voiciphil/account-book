@@ -25,13 +25,14 @@ exports.all = async (req, res, next) => {
 };
 
 exports.add = (req, res, next) => {
-  const { token, date, breakdown, price } = req.body;
+  const { token, date, category, breakdown, price } = req.body;
   const payload = jwt.verify(token, process.env.SECRETE_KEY);
 
   try {
     db.transactions.create({
       user_id: payload.user_id,
       date: date,
+      category: category,
       breakdown: breakdown,
       price: price,
     });

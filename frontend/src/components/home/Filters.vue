@@ -1,33 +1,19 @@
 <template>
   <div>
     <v-row
-      justify="center"
+      justify="space-around"
       class="mt-5"
     >
       <v-col
         cols="3"
       >
-        <v-radio-group
-          class="ml-12"
-          v-model="radio"
-          row
-        >
-          <v-radio
-            label="전체"
-            color="indigo darken-3"
-            value="0"
-          />
-          <v-radio
-            label="수입"
-            color="indigo darken-3"
-            value="1"
-          />
-          <v-radio
-            label="지출"
-            color="indigo darken-3"
-            value="2"
-          />
-        </v-radio-group>
+        <v-select
+          v-bind:items="price"
+          v-model="priceModel"
+          color="indigo darken-3"
+          outlined
+          dense
+        />
       </v-col>
       <v-col
         cols="3"
@@ -42,7 +28,6 @@
         >
           <template v-slot:activator="{ on }">
             <v-text-field
-              class="mt-3"
               v-model="date"
               prepend-inner-icon="mdi-calendar"
               readonly
@@ -63,7 +48,6 @@
         cols="3"
       >
         <v-select
-          class="mt-3"
           v-bind:items="categories"
           label="카테고리"
           color="indigo darken-3"
@@ -81,7 +65,8 @@ export default {
     return {
       date: new Date().toISOString().substr(0, 10),
       menu: false,
-      radio: '0',
+      price: ['전체', '수입', '지출'],
+      priceModel: '전체',
       categories: [],
     };
   },
