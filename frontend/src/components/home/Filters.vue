@@ -60,7 +60,6 @@
 
 <script>
 export default {
-  name: 'Filter',
   data() {
     return {
       date: new Date().toISOString().substr(0, 10),

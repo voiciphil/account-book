@@ -59,7 +59,6 @@
 
 <script>
 export default {
-  name: 'SignIn',
   data() {
     return {
       id: '',

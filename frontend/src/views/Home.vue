@@ -1,17 +1,17 @@
 <template>
   <div>
-    <Filter/>
+    <Filters/>
     <List/>
   </div>
 </template>
 
 <script>
-import Filter from '../components/home/Filter.vue';
+import Filters from '../components/home/Filters.vue';
 import List from '../components/home/List.vue';
 
 export default {
   components: {
-    Filter,
+    Filters,
     List,
   },
 };
