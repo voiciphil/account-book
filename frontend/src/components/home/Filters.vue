@@ -93,7 +93,7 @@ export default {
       const res = await this.$axios.post('http://localhost:3000/api/categories/all', {
         token: localStorage.token,
       });
-      // this.categories = [];
+
       await res.data.data.forEach((item) => {
         this.categories.push(item.category);
       });
