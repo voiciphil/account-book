@@ -96,9 +96,7 @@ export default {
       // this.categories = [];
       await res.data.data.forEach((item) => {
         this.categories.push(item.category);
-        console.log(item.category);
       });
-      console.log(this.categories);
     },
   },
 };
