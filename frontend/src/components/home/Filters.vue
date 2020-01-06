@@ -21,10 +21,9 @@
         <v-menu
           v-model="menu"
           v-bind:close-on-content-click="false"
-          v-bind:nudge-right="40"
           transition="scale-transition"
           offset-y
-          min-width="300px"
+          min-width="342px"
         >
           <template v-slot:activator="{ on }">
             <v-text-field
@@ -63,7 +62,7 @@
 export default {
   data() {
     return {
-      date: new Date().toISOString().substr(0, 10),
+      date: '',
       menu: false,
       price: ['전체', '수입', '지출'],
       priceModel: '전체',
