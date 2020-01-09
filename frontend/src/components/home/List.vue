@@ -3,15 +3,15 @@
     <v-data-table
       v-bind:headers="header"
       v-bind:items="transactions"
-      v-bind:sort-by="['date']"
-      v-bind:sort-desc="[true]"
+      v-bind:sort-by="['date', 'id']"
+      v-bind:sort-desc="[true, true]"
     >
       <template v-slot:top>
         <v-toolbar
           flat
           color="white"
         >
-          <v-toolbar-title>내역</v-toolbar-title>
+          <v-toolbar-title>{{ '합계: ' + total }}</v-toolbar-title>
           <v-spacer/>
           <v-dialog
             v-model="dialog"
@@ -21,7 +21,6 @@
               <v-btn
                 color="indigo darken-4"
                 dark
-                flat
                 v-on="on"
               >추가</v-btn>
             </template>
@@ -37,7 +36,9 @@
                   />
                 </v-col>
                 <v-col class="mr-2">
-                  <v-row>
+                  <v-row
+                    class="mb-4"
+                  >
                     <v-select
                       v-bind:items="categories"
                       v-model="category"
@@ -46,7 +47,9 @@
                       label="카테고리"
                     />
                   </v-row>
-                  <v-row>
+                  <v-row
+                    class="my-4"
+                  >
                     <v-text-field
                       v-model="breakdown"
                       color="indigo darken-3"
@@ -54,7 +57,9 @@
                       label="내역"
                     />
                   </v-row>
-                  <v-row>
+                  <v-row
+                    class="my-4"
+                  >
                     <v-switch
                       v-model="mode"
                       inset
@@ -68,7 +73,10 @@
                       outlined
                     />
                   </v-row>
-                  <v-row justify="end">
+                  <v-row
+                    class="mt-4"
+                    justify="end"
+                  >
                     <v-card-actions>
                       <v-btn
                         v-on:click="dialog = false"
@@ -129,11 +137,13 @@ export default {
       category: '',
       breakdown: '',
       price: 0,
+      total: 0,
     };
   },
-  created() {
-    this.getTransactions();
-    this.getCategories();
+  async created() {
+    await this.getTransactions();
+    await this.getCategories();
+    this.getTotal();
   },
   methods: {
     async getTransactions() {
@@ -171,7 +181,17 @@ export default {
       if (res.data.success) {
         this.dialog = false;
         this.transactions = [];
+        this.mode = false;
+        this.category = '';
+        this.breakdown = '';
+        this.price = 0;
         await this.getTransactions();
+        await this.getTotal();
+      }
+    },
+    getTotal() {
+      for (let i = 0; i < this.transactions.length; i += 1) {
+        this.total += this.transactions[i].price;
       }
     },
   },
