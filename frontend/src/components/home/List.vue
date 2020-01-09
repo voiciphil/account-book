@@ -101,11 +101,8 @@
       </template>
       <template v-slot:item.action="{ item }">
         <v-icon
-          small
-          @click="deleteTransaction(item)"
-        >
-          mdi-delete
-        </v-icon>
+          v-on:click="deleteTransaction(item)"
+        >mdi-delete</v-icon>
       </template>
     </v-data-table>
   </div>
@@ -120,25 +117,35 @@ export default {
       header: [
         {
           text: '날짜',
-          align: 'left',
+          align: 'center',
           sortable: true,
           value: 'date',
         },
         {
           text: '카테고리',
+          align: 'center',
           value: 'category',
         },
         {
           text: '내역',
+          align: 'center',
           value: 'breakdown',
         },
         {
           text: '수입',
+          align: 'center',
           value: 'income',
         },
         {
           text: '지출',
+          align: 'center',
           value: 'expenditure',
+        },
+        {
+          text: '삭제',
+          align: 'center',
+          sortable: false,
+          value: 'action',
         },
       ],
       transactions: [],
@@ -159,6 +166,8 @@ export default {
     this.getTotal();
     bus.$on('month', (month) => {
       this.month = month;
+      this.total = 0;
+      this.getTotal();
     });
   },
   methods: {
@@ -211,10 +220,9 @@ export default {
         id: item.id,
       });
 
-      if (res.success) {
-        this.transactions = [];
-        await this.getTransactions();
-        await this.getTotal();
+      if (res.data.success) {
+        this.transactions.splice(this.transactions.indexOf(item), 1);
+        this.total -= item.price;
       }
     },
     getTotal() {
