@@ -18,11 +18,13 @@
             width="675"
           >
             <template v-slot:activator="{ on }">
-              <v-btn
-                color="indigo darken-4"
-                dark
-                v-on="on"
-              >추가</v-btn>
+              <v-toolbar-items>
+                <v-btn
+                  color="indigo darken-4"
+                  dark
+                  v-on="on"
+                >내역 추가</v-btn>
+              </v-toolbar-items>
             </template>
             <v-card>
               <v-row
@@ -185,6 +187,7 @@ export default {
         this.category = '';
         this.breakdown = '';
         this.price = 0;
+        this.total = 0;
         await this.getTransactions();
         await this.getTotal();
       }
