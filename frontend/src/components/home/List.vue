@@ -2,7 +2,7 @@
   <div>
     <v-data-table
       v-bind:headers="header"
-      v-bind:items="transactions"
+      v-bind:items="transactions.filter(i => i.date.substr(0, 7) === month)"
       v-bind:sort-by="['date', 'id']"
       v-bind:sort-desc="[true, true]"
     >
@@ -11,7 +11,7 @@
           flat
           color="white"
         >
-          <v-toolbar-title>{{ '합계: ' + total + '원' }}</v-toolbar-title>
+          <v-toolbar-title>{{ '합계: ' + total.toLocaleString() + '원' }}</v-toolbar-title>
           <v-spacer/>
           <v-dialog
             v-model="dialog"
@@ -99,11 +99,21 @@
           </v-dialog>
         </v-toolbar>
       </template>
+      <template v-slot:item.action="{ item }">
+        <v-icon
+          small
+          @click="deleteTransaction(item)"
+        >
+          mdi-delete
+        </v-icon>
+      </template>
     </v-data-table>
   </div>
 </template>
 
 <script>
+import bus from '../../bus';
+
 export default {
   data() {
     return {
@@ -140,12 +150,16 @@ export default {
       breakdown: '',
       price: 0,
       total: 0,
+      month: new Date().toISOString().substr(0, 7),
     };
   },
   async created() {
     await this.getTransactions();
     await this.getCategories();
     this.getTotal();
+    bus.$on('month', (month) => {
+      this.month = month;
+    });
   },
   methods: {
     async getTransactions() {
@@ -156,9 +170,9 @@ export default {
       this.transactions = res.data.data;
       for (let i = 0; i < this.transactions.length; i += 1) {
         if (this.transactions[i].price > 0) {
-          this.transactions[i].income = this.transactions[i].price;
+          this.transactions[i].income = this.transactions[i].price.toLocaleString();
         } else if (this.transactions[i].price < 0) {
-          this.transactions[i].expenditure = -this.transactions[i].price;
+          this.transactions[i].expenditure = (-this.transactions[i].price).toLocaleString();
         }
       }
     },
@@ -192,10 +206,21 @@ export default {
         await this.getTotal();
       }
     },
-    getTotal() {
-      for (let i = 0; i < this.transactions.length; i += 1) {
-        this.total += this.transactions[i].price;
+    async deleteTransaction(item) {
+      const res = await this.$axios.post('http://localhost:3000/api/transactions/delete', {
+        id: item.id,
+      });
+
+      if (res.success) {
+        this.transactions = [];
+        await this.getTransactions();
+        await this.getTotal();
       }
+    },
+    getTotal() {
+      this.transactions.filter(i => i.date.substr(0, 7) === this.month).forEach((i) => {
+        this.total += i.price;
+      });
     },
   },
 };

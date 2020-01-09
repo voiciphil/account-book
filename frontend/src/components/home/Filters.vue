@@ -23,11 +23,11 @@
           v-bind:close-on-content-click="false"
           transition="scale-transition"
           offset-y
-          min-width="342px"
+          min-width="300px"
         >
           <template v-slot:activator="{ on }">
             <v-text-field
-              v-model="date"
+              v-model="month"
               prepend-inner-icon="mdi-calendar"
               readonly
               outlined
@@ -37,9 +37,11 @@
             />
           </template>
           <v-date-picker
-            v-model="date"
-            v-on:input="menu = false"
+            v-model="month"
+            v-on:input="setMonth"
+            type="month"
             color="indigo darken-3"
+            locale="ko-kr"
           />
         </v-menu>
       </v-col>
@@ -59,10 +61,12 @@
 </template>
 
 <script>
+import bus from '../../bus';
+
 export default {
   data() {
     return {
-      date: '',
+      month: new Date().toISOString().substr(0, 7),
       menu: false,
       price: ['전체', '수입', '지출'],
       priceModel: '전체',
@@ -71,6 +75,7 @@ export default {
   },
   created() {
     this.getCategories();
+    this.setMonth();
   },
   methods: {
     async getCategories() {
@@ -81,6 +86,10 @@ export default {
       await res.data.data.forEach((item) => {
         this.categories.push(item.category);
       });
+    },
+    setMonth() {
+      this.menu = false;
+      bus.$emit('month', this.month);
     },
   },
 };
