@@ -11,7 +11,7 @@
           flat
           color="white"
         >
-          <v-toolbar-title>{{ '합계: ' + total }}</v-toolbar-title>
+          <v-toolbar-title>{{ '합계: ' + total + '원' }}</v-toolbar-title>
           <v-spacer/>
           <v-dialog
             v-model="dialog"
