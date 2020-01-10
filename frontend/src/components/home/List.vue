@@ -181,9 +181,9 @@ export default {
       dialog: false,
       picker: new Date().toISOString().substr(0, 10),
       mode: false,
-      category: '',
-      breakdown: '',
-      price: '',
+      category: null,
+      breakdown: null,
+      price: null,
       total: 0,
       income: 0,
       expenditure: 0,
@@ -196,6 +196,7 @@ export default {
     this.getIncome();
     this.getExpenditure();
     this.getTotal();
+
     bus.$on('month', (month) => {
       this.month = month;
       this.total = 0;
@@ -243,9 +244,11 @@ export default {
         this.dialog = false;
         this.transactions = [];
         this.mode = false;
-        this.category = '';
-        this.breakdown = '';
-        this.price = '';
+        this.category = null;
+        this.breakdown = null;
+        this.price = null;
+        this.income = 0;
+        this.expenditure = 0;
         this.total = 0;
         await this.getTransactions();
         await this.getIncome();

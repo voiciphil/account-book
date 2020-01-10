@@ -24,12 +24,12 @@ exports.all = async (req, res, next) => {
   }
 };
 
-exports.add = (req, res, next) => {
+exports.add = async (req, res, next) => {
   const { token, date, category, breakdown, price } = req.body;
   const payload = jwt.verify(token, process.env.SECRETE_KEY);
 
   try {
-    db.transactions.create({
+    await db.transactions.create({
       user_id: payload.user_id,
       date: date,
       category: category,
@@ -46,11 +46,11 @@ exports.add = (req, res, next) => {
   }
 };
 
-exports.delete = (req, res, next) => {
+exports.delete = async (req, res, next) => {
   const { id } = req.body;
 
   try {
-    db.transactions.destroy({
+    await db.transactions.destroy({
       where: {
         id: parseInt(id),
       },

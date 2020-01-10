@@ -53,11 +53,11 @@ exports.verify = (req, res, next) => {
   }
 };
 
-exports.signUp = (req, res, next) => {
+exports.signUp = async (req, res, next) => {
   const { id, pw } = req.body;
 
   try {
-    db.users.create({
+    await db.users.create({
       user_id: id,
       user_pw: pw,
     });
