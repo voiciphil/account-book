@@ -11,7 +11,29 @@
           flat
           color="white"
         >
-          <v-toolbar-title>{{ '합계: ' + total.toLocaleString() + '원' }}</v-toolbar-title>
+          <v-row no-gutters>
+            <v-col
+              class="mr-n12"
+            >
+              <v-toolbar-title>
+                {{ '잔액: ' + total.toLocaleString() + '원' }}
+              </v-toolbar-title>
+            </v-col>
+            <v-col
+              class="mx-n12"
+            >
+              <v-toolbar-title>
+                {{ '수입: ' + income.toLocaleString() + '원' }}
+              </v-toolbar-title>
+            </v-col>
+            <v-col
+              class="ml-n12"
+            >
+              <v-toolbar-title>
+                {{ '지출: ' + ((-expenditure + 1) - 1).toLocaleString() + '원' }}
+              </v-toolbar-title>
+            </v-col>
+          </v-row>
           <v-spacer/>
           <v-dialog
             v-model="dialog"
@@ -26,7 +48,9 @@
                 >내역 추가</v-btn>
               </v-toolbar-items>
             </template>
-            <v-card>
+            <v-card
+              color="grey lighten-4"
+            >
               <v-row
                 class="mx-3"
                 align="center"
@@ -124,21 +148,25 @@ export default {
         {
           text: '카테고리',
           align: 'center',
+          sortable: false,
           value: 'category',
         },
         {
           text: '내역',
           align: 'center',
+          sortable: false,
           value: 'breakdown',
         },
         {
           text: '수입',
           align: 'center',
+          sortable: false,
           value: 'income',
         },
         {
           text: '지출',
           align: 'center',
+          sortable: false,
           value: 'expenditure',
         },
         {
@@ -155,18 +183,26 @@ export default {
       mode: false,
       category: '',
       breakdown: '',
-      price: 0,
+      price: '',
       total: 0,
+      income: 0,
+      expenditure: 0,
       month: new Date().toISOString().substr(0, 7),
     };
   },
   async created() {
     await this.getTransactions();
     await this.getCategories();
+    this.getIncome();
+    this.getExpenditure();
     this.getTotal();
     bus.$on('month', (month) => {
       this.month = month;
       this.total = 0;
+      this.income = 0;
+      this.expenditure = 0;
+      this.getIncome();
+      this.getExpenditure();
       this.getTotal();
     });
   },
@@ -209,9 +245,11 @@ export default {
         this.mode = false;
         this.category = '';
         this.breakdown = '';
-        this.price = 0;
+        this.price = '';
         this.total = 0;
         await this.getTransactions();
+        await this.getIncome();
+        await this.getExpenditure();
         await this.getTotal();
       }
     },
@@ -226,9 +264,23 @@ export default {
       }
     },
     getTotal() {
-      this.transactions.filter(i => i.date.substr(0, 7) === this.month).forEach((i) => {
-        this.total += i.price;
-      });
+      this.total = this.income + this.expenditure;
+    },
+    getIncome() {
+      this.transactions
+        .filter(i => i.date.substr(0, 7) === this.month)
+        .filter(i => i.price > 0)
+        .forEach((i) => {
+          this.income += i.price;
+        });
+    },
+    getExpenditure() {
+      this.transactions
+        .filter(i => i.date.substr(0, 7) === this.month)
+        .filter(i => i.price < 0)
+        .forEach((i) => {
+          this.expenditure += i.price;
+        });
     },
   },
 };

@@ -7,17 +7,6 @@
       <v-col
         cols="3"
       >
-        <v-select
-          v-bind:items="price"
-          v-model="priceModel"
-          color="indigo darken-3"
-          outlined
-          dense
-        />
-      </v-col>
-      <v-col
-        cols="3"
-      >
         <v-menu
           v-model="menu"
           v-bind:close-on-content-click="false"
@@ -48,13 +37,20 @@
       <v-col
         cols="3"
       >
-        <v-select
-          v-bind:items="categories"
-          label="카테고리"
-          color="indigo darken-3"
-          outlined
-          dense
-        />
+        <v-row>
+          <v-select
+            v-bind:items="categories"
+            label="카테고리"
+            color="indigo darken-3"
+            outlined
+            dense
+          />
+          <v-btn
+            color="indigo darken-3"
+            height="40px"
+            text
+          >편집</v-btn>
+        </v-row>
       </v-col>
     </v-row>
   </div>
@@ -68,8 +64,6 @@ export default {
     return {
       month: new Date().toISOString().substr(0, 7),
       menu: false,
-      price: ['전체', '수입', '지출'],
-      priceModel: '전체',
       categories: [],
     };
   },
