@@ -65,8 +65,7 @@
                   <v-row
                     class="mb-4"
                   >
-                    <v-select
-                      v-bind:items="categories"
+                    <v-text-field
                       v-model="category"
                       color="indigo darken-3"
                       outlined
@@ -177,7 +176,6 @@ export default {
         },
       ],
       transactions: [],
-      categories: [],
       dialog: false,
       picker: new Date().toISOString().substr(0, 10),
       mode: false,
@@ -192,7 +190,6 @@ export default {
   },
   async created() {
     await this.getTransactions();
-    await this.getCategories();
     this.getIncome();
     this.getExpenditure();
     this.getTotal();
@@ -221,15 +218,6 @@ export default {
           this.transactions[i].expenditure = (-this.transactions[i].price).toLocaleString();
         }
       }
-    },
-    async getCategories() {
-      const res = await this.$axios.post('http://localhost:3000/api/categories/all', {
-        token: localStorage.token,
-      });
-
-      await res.data.data.forEach((item) => {
-        this.categories.push(item.category);
-      });
     },
     async addTransaction() {
       const res = await this.$axios.post('http://localhost:3000/api/transactions/add', {

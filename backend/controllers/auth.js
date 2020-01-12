@@ -33,7 +33,7 @@ exports.signIn = async (req, res, next) => {
   } catch (err) {
     res.json({
       token: '',
-      message: 'id not registered',
+      message: 'ID not registered',
     });
   }
 };
@@ -69,4 +69,4 @@ exports.signUp = async (req, res, next) => {
       success: false,
     });
   }
-}
+};

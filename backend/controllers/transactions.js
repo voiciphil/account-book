@@ -65,3 +65,52 @@ exports.delete = async (req, res, next) => {
     });
   }
 };
+
+exports.update = async (req, res, next) => {
+  const { id, date, category, breakdown, price } = req.body;
+
+  try {
+    await db.categories.update({
+      date: date,
+      category: category,
+      breakdown: breakdown,
+      price: price,
+    }, {
+      where: {
+        id: id,
+      }
+    });
+
+    res.json({
+      success: true,
+    });
+  } catch {
+    res.json({
+      success: false,
+    });
+  }
+};
+
+exports.category = async (req, res, next) => {
+  const { token } = req.body;
+  const payload = jwt.verify(token, process.env.SECRETE_KEY);
+
+  try {
+    const categories = await db.transactions.findAll({
+      attributes: ['category'],
+      where: {
+        user_id: payload.user_id,
+      },
+    });
+
+    res.json({
+      data: categories,
+      success: true,
+    });
+  } catch {
+    res.json({
+      data: [],
+      success: false,
+    });
+  }
+};

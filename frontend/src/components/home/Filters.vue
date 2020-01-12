@@ -45,11 +45,6 @@
             outlined
             dense
           />
-          <v-btn
-            color="indigo darken-3"
-            height="40px"
-            text
-          >편집</v-btn>
         </v-row>
       </v-col>
     </v-row>
@@ -73,12 +68,12 @@ export default {
   },
   methods: {
     async getCategories() {
-      const res = await this.$axios.post('http://localhost:3000/api/categories/all', {
+      const res = await this.$axios.post('http://localhost:3000/api/transactions/category', {
         token: localStorage.token,
       });
 
-      await res.data.data.forEach((item) => {
-        this.categories.push(item.category);
+      res.data.data.forEach((i) => {
+        this.categories.push(i.category);
       });
     },
     setMonth() {

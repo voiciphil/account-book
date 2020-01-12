@@ -12,4 +12,4 @@ module.exports = (seq, dataTypes) => {
   }, {
     timestamps: false,
   });
-}
+};
