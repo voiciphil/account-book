@@ -27,7 +27,7 @@
           </template>
           <v-date-picker
             v-model="month"
-            v-on:input="setMonth"
+            v-on:input="filtrate"
             type="month"
             color="indigo darken-3"
             locale="ko-kr"
@@ -40,6 +40,8 @@
         <v-row>
           <v-select
             v-bind:items="categories"
+            v-model="category"
+            v-on:input="filtrate"
             label="카테고리"
             color="indigo darken-3"
             outlined
@@ -58,13 +60,14 @@ export default {
   data() {
     return {
       month: new Date().toISOString().substr(0, 7),
+      category: '전체',
       menu: false,
-      categories: [],
+      categories: ['전체'],
     };
   },
   created() {
     this.getCategories();
-    this.setMonth();
+    this.filtrate();
   },
   methods: {
     async getCategories() {
@@ -76,9 +79,9 @@ export default {
         this.categories.push(i.category);
       });
     },
-    setMonth() {
+    filtrate() {
       this.menu = false;
-      bus.$emit('month', this.month);
+      bus.$emit('filtrate', this.month, this.category);
     },
   },
 };

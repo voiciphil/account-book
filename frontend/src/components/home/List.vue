@@ -186,6 +186,7 @@ export default {
       income: 0,
       expenditure: 0,
       month: new Date().toISOString().substr(0, 7),
+      categoryFilter: '전체',
     };
   },
   async created() {
@@ -194,8 +195,9 @@ export default {
     this.getExpenditure();
     this.getTotal();
 
-    bus.$on('month', (month) => {
+    bus.$on('filtrate', (month, category) => {
       this.month = month;
+      this.categoryFilter = category;
       this.total = 0;
       this.income = 0;
       this.expenditure = 0;
@@ -255,11 +257,16 @@ export default {
       }
     },
     getTotal() {
-      this.total = this.income + this.expenditure;
+      this.transactions
+        .filter(i => i.date.substr(0, 7) === this.month)
+        .forEach((i) => {
+          this.total += i.price;
+        });
     },
     getIncome() {
       this.transactions
         .filter(i => i.date.substr(0, 7) === this.month)
+        .filter(i => (this.categoryFilter === '전체' ? true : i.category === this.categoryFilter))
         .filter(i => i.price > 0)
         .forEach((i) => {
           this.income += i.price;
@@ -268,6 +275,7 @@ export default {
     getExpenditure() {
       this.transactions
         .filter(i => i.date.substr(0, 7) === this.month)
+        .filter(i => (this.categoryFilter === '전체' ? true : i.category === this.categoryFilter))
         .filter(i => i.price < 0)
         .forEach((i) => {
           this.expenditure += i.price;
