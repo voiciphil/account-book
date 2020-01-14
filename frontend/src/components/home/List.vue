@@ -2,7 +2,7 @@
   <div>
     <v-data-table
       v-bind:headers="header"
-      v-bind:items="transactions.filter(i => i.date.substr(0, 7) === month)"
+      v-bind:items="getFilteredTransactions()"
       v-bind:sort-by="['date', 'id']"
       v-bind:sort-desc="[true, true]"
     >
@@ -280,6 +280,11 @@ export default {
         .forEach((i) => {
           this.expenditure += i.price;
         });
+    },
+    getFilteredTransactions() {
+      return this.transactions
+        .filter(i => i.date.substr(0, 7) === this.month)
+        .filter(i => (this.categoryFilter === '전체' ? true : i.category === this.categoryFilter));
     },
   },
 };
