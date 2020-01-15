@@ -70,7 +70,7 @@ exports.update = async (req, res, next) => {
   const { id, date, category, breakdown, price } = req.body;
 
   try {
-    await db.categories.update({
+    await db.transactions.update({
       date: date,
       category: category,
       breakdown: breakdown,

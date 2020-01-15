@@ -62,12 +62,15 @@ export default {
       month: new Date().toISOString().substr(0, 7),
       category: '전체',
       menu: false,
-      categories: ['전체'],
+      categories: [],
     };
   },
   created() {
     this.getCategories();
     this.filtrate();
+    bus.$on('updateCategory', () => {
+      this.getCategories();
+    });
   },
   methods: {
     async getCategories() {
@@ -75,9 +78,12 @@ export default {
         token: localStorage.token,
       });
 
+      this.categories = [];
       res.data.data.forEach((i) => {
         this.categories.push(i.category);
       });
+      this.categories.sort();
+      this.categories.unshift('전체');
     },
     filtrate() {
       this.menu = false;

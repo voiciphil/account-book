@@ -120,9 +120,88 @@
               </v-row>
             </v-card>
           </v-dialog>
+          <v-dialog
+            v-model="editDialog"
+            width="675"
+          >
+            <v-card
+              color="grey lighten-4"
+            >
+              <v-row
+                class="mx-3"
+                align="center"
+              >
+                <v-col cols="6">
+                  <v-date-picker
+                    v-model="editedItem.date"
+                    color="indigo darken-3"
+                  />
+                </v-col>
+                <v-col class="mr-2">
+                  <v-row
+                    class="mb-4"
+                  >
+                    <v-text-field
+                      v-model="editedItem.category"
+                      color="indigo darken-3"
+                      outlined
+                      label="카테고리"
+                    />
+                  </v-row>
+                  <v-row
+                    class="my-4"
+                  >
+                    <v-text-field
+                      v-model="editedItem.breakdown"
+                      color="indigo darken-3"
+                      outlined
+                      label="내역"
+                    />
+                  </v-row>
+                  <v-row
+                    class="my-4"
+                  >
+                    <v-switch
+                      v-model="mode"
+                      inset
+                      color="indigo darken-3"
+                    />
+                    <v-text-field
+                      v-bind:label="mode ? '수입' : '지출'"
+                      v-model="editedItem.price"
+                      type="number"
+                      color="indigo darken-3"
+                      outlined
+                    />
+                  </v-row>
+                  <v-row
+                    class="mt-4"
+                    justify="end"
+                  >
+                    <v-card-actions>
+                      <v-btn
+                        v-on:click="editDialog = mode = false"
+                        class="mr-2"
+                        color="indigo darken-3"
+                        text
+                      >취소</v-btn>
+                      <v-btn
+                        v-on:click="editTransaction"
+                        color="indigo darken-3"
+                        text
+                      >확인</v-btn>
+                    </v-card-actions>
+                  </v-row>
+                </v-col>
+              </v-row>
+            </v-card>
+          </v-dialog>
         </v-toolbar>
       </template>
       <template v-slot:item.action="{ item }">
+        <v-icon
+          v-on:click="editTransactionDialog(item)"
+        >mdi-pencil</v-icon>
         <v-icon
           v-on:click="deleteTransaction(item)"
         >mdi-delete</v-icon>
@@ -169,14 +248,22 @@ export default {
           value: 'expenditure',
         },
         {
-          text: '삭제',
+          text: '수정 / 삭제',
           align: 'center',
           sortable: false,
           value: 'action',
         },
       ],
+      editedItem: {
+        id: null,
+        date: null,
+        category: null,
+        breakdown: null,
+        price: null,
+      },
       transactions: [],
       dialog: false,
+      editDialog: false,
       picker: new Date().toISOString().substr(0, 10),
       mode: false,
       category: null,
@@ -241,9 +328,10 @@ export default {
         this.expenditure = 0;
         this.total = 0;
         await this.getTransactions();
-        await this.getIncome();
-        await this.getExpenditure();
-        await this.getTotal();
+        this.getIncome();
+        this.getExpenditure();
+        this.getTotal();
+        bus.$emit('updateCategory');
       }
     },
     async deleteTransaction(item) {
@@ -255,6 +343,36 @@ export default {
         this.transactions.splice(this.transactions.indexOf(item), 1);
         this.total -= item.price;
       }
+    },
+    async editTransaction() {
+      this.editedItem.price = this.mode ? this.editedItem.price : -this.editedItem.price;
+      const res = await this.$axios.post('http://localhost:3000/api/transactions/update', this.editedItem);
+
+      if (res.data.success) {
+        this.editDialog = false;
+        this.transactions = [];
+        this.mode = false;
+        this.category = null;
+        this.breakdown = null;
+        this.price = null;
+        this.income = 0;
+        this.expenditure = 0;
+        this.total = 0;
+        await this.getTransactions();
+        this.getIncome();
+        this.getExpenditure();
+        this.getTotal();
+        bus.$emit('updateCategory');
+      }
+    },
+    editTransactionDialog(item) {
+      this.editedItem.id = item.id;
+      this.editedItem.date = item.date;
+      this.editedItem.category = item.category;
+      this.editedItem.breakdown = item.breakdown;
+      this.editedItem.price = item.price > 0 ? item.price : -item.price;
+      this.mode = item.price > 0;
+      this.editDialog = true;
     },
     getTotal() {
       this.transactions
