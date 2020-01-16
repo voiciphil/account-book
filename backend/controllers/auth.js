@@ -1,10 +1,9 @@
-const db = require('../models');
 const jwt = require('jsonwebtoken');
+const db = require('../models');
 require('dotenv').config();
 
-exports.signIn = async (req, res, next) => {
-  let { id, pw } = req.body;
-  pw = Buffer.from(pw, 'base64').toString('ascii');
+exports.signIn = async (req, res) => {
+  const { id, pw } = req.body;
 
   try {
     const user = await db.users.findOne({
@@ -12,8 +11,8 @@ exports.signIn = async (req, res, next) => {
         user_id: id,
       },
     });
-    
-    if (user.user_pw === pw) {
+
+    if (user.user_pw === Buffer.from(pw, 'base64').toString('ascii')) {
       const payload = {
         user_id: user.user_id,
       };
@@ -38,7 +37,7 @@ exports.signIn = async (req, res, next) => {
   }
 };
 
-exports.verify = (req, res, next) => {
+exports.verify = (req, res) => {
   const { token } = req.body;
 
   try {
@@ -46,14 +45,14 @@ exports.verify = (req, res, next) => {
     res.json({
       verified: true,
     });
-  } catch {
+  } catch (err) {
     res.json({
       verified: false,
     });
   }
 };
 
-exports.signUp = async (req, res, next) => {
+exports.signUp = async (req, res) => {
   const { id, pw } = req.body;
 
   try {
@@ -64,7 +63,7 @@ exports.signUp = async (req, res, next) => {
     res.json({
       success: true,
     });
-  } catch {
+  } catch (err) {
     res.json({
       success: false,
     });

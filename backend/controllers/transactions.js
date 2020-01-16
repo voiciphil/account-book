@@ -1,7 +1,7 @@
-const db = require('../models');
 const jwt = require('jsonwebtoken');
+const db = require('../models');
 
-exports.all = async (req, res, next) => {
+exports.all = async (req, res) => {
   const { token } = req.body;
   const payload = jwt.verify(token, process.env.SECRETE_KEY);
 
@@ -24,74 +24,77 @@ exports.all = async (req, res, next) => {
   }
 };
 
-exports.add = async (req, res, next) => {
-  const { token, date, category, breakdown, price } = req.body;
+exports.add = async (req, res) => {
+  const {
+    token, date, category, breakdown, price,
+  } = req.body;
   const payload = jwt.verify(token, process.env.SECRETE_KEY);
 
   try {
     await db.transactions.create({
       user_id: payload.user_id,
-      date: date,
-      category: category,
-      breakdown: breakdown,
-      price: price,
+      date,
+      category,
+      breakdown,
+      price,
     });
     res.json({
       success: true,
     });
-  } catch {
+  } catch (err) {
     res.json({
       success: false,
     });
   }
 };
 
-exports.delete = async (req, res, next) => {
+exports.delete = async (req, res) => {
   const { id } = req.body;
 
   try {
     await db.transactions.destroy({
       where: {
-        id: parseInt(id),
+        id: parseInt(id, 10),
       },
     });
     res.json({
       success: true,
     });
-  }
-  catch (err) {
+  } catch (err) {
     res.json({
       success: false,
     });
   }
 };
 
-exports.update = async (req, res, next) => {
-  const { id, date, category, breakdown, price } = req.body;
+exports.update = async (req, res) => {
+  const {
+    id, date, category, breakdown, price,
+  } = req.body;
 
   try {
     await db.transactions.update({
-      date: date,
-      category: category,
-      breakdown: breakdown,
-      price: price,
+      date,
+      category,
+      breakdown,
+      price,
     }, {
       where: {
-        id: id,
-      }
+        id,
+      },
     });
 
     res.json({
       success: true,
     });
-  } catch {
+  } catch (err) {
     res.json({
       success: false,
     });
   }
 };
 
-exports.category = async (req, res, next) => {
+exports.category = async (req, res) => {
   const { token } = req.body;
   const payload = jwt.verify(token, process.env.SECRETE_KEY);
 
@@ -107,7 +110,7 @@ exports.category = async (req, res, next) => {
       data: categories,
       success: true,
     });
-  } catch {
+  } catch (err) {
     res.json({
       data: [],
       success: false,
