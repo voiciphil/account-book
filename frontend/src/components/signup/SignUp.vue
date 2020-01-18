@@ -8,7 +8,7 @@
         <v-text-field
           v-model="id"
           v-on:keyup.enter="signUp"
-          v-bind:rules="[rules.required]"
+          v-bind:rules="[rules.duplicated, rules.required,]"
           v-bind:error="errors.id"
           color="indigo darken-3"
           label="아이디"
@@ -85,11 +85,13 @@ export default {
       rules: {
         required: value => !!value || '입력해 주세요.',
         different: value => value === this.pw || '비밀번호가 일치하지 않습니다.',
+        duplicated: () => !this.errors.duplicated || '아이디가 중복되었습니다.',
       },
       errors: {
         id: false,
         pw: false,
         repw: false,
+        duplicated: false,
       },
     };
   },
@@ -107,7 +109,12 @@ export default {
           });
 
           if (res.data.success) {
-            this.$router.push('/');
+            this.$router.push('/signed-up');
+          } else {
+            this.errors.duplicated = true;
+            this.errors.id = true;
+            this.rules.duplicated();
+            this.id = '';
           }
         }
       }

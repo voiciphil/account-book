@@ -5,6 +5,7 @@ import Home from '../views/Home.vue';
 import NoAuth from '../views/NoAuth.vue';
 import SignIn from '../views/SignIn.vue';
 import SignUp from '../views/SignUp.vue';
+import SignedUp from '../views/SIgnedUp.vue';
 
 Vue.use(VueRouter);
 
@@ -40,6 +41,11 @@ const routes = [
     path: '/sign-up',
     name: 'SignUp',
     component: SignUp,
+  },
+  {
+    path: '/signed-up',
+    name: 'SignedUp',
+    component: SignedUp,
   },
 ];
 
