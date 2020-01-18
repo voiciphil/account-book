@@ -26,13 +26,13 @@ exports.signIn = async (req, res) => {
     } else {
       res.json({
         token: '',
-        message: 'passwords do not match',
+        message: 'password do not match',
       });
     }
   } catch (err) {
     res.json({
       token: '',
-      message: 'ID not registered',
+      message: 'id not registered',
     });
   }
 };

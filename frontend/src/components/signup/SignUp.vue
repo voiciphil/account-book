@@ -8,7 +8,7 @@
         <v-text-field
           v-model="id"
           v-on:keyup.enter="signUp"
-          v-bind:rules="[rules.duplicated, rules.required,]"
+          v-bind:rules="[rules.duplicated, rules.required]"
           v-bind:error="errors.id"
           color="indigo darken-3"
           label="아이디"
@@ -55,7 +55,7 @@
           outlined
           dense
           counter
-          maxlength="25"
+          maxlength="20"
         />
       </v-col>
     </v-row>
@@ -113,7 +113,6 @@ export default {
           } else {
             this.errors.duplicated = true;
             this.errors.id = true;
-            this.rules.duplicated();
             this.id = '';
           }
         }
