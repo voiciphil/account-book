@@ -3,9 +3,9 @@ const db = require('../models');
 
 exports.all = async (req, res) => {
   const { token } = req.body;
-  const payload = jwt.verify(token, process.env.SECRETE_KEY);
 
   try {
+    const payload = jwt.verify(token, process.env.SECRETE_KEY);
     const transactions = await db.transactions.findAll({
       where: {
         user_id: payload.user_id,
@@ -28,9 +28,9 @@ exports.add = async (req, res) => {
   const {
     token, date, category, breakdown, price,
   } = req.body;
-  const payload = jwt.verify(token, process.env.SECRETE_KEY);
 
   try {
+    const payload = jwt.verify(token, process.env.SECRETE_KEY);
     await db.transactions.create({
       user_id: payload.user_id,
       date,
@@ -96,9 +96,9 @@ exports.update = async (req, res) => {
 
 exports.category = async (req, res) => {
   const { token } = req.body;
-  const payload = jwt.verify(token, process.env.SECRETE_KEY);
 
   try {
+    const payload = jwt.verify(token, process.env.SECRETE_KEY);
     const categories = await db.transactions.findAll({
       attributes: ['category'],
       where: {
