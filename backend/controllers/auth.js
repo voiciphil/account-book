@@ -24,13 +24,13 @@ exports.signIn = async (req, res) => {
         message: 'login success',
       });
     } else {
-      res.status(204).json({
+      res.status(400).json({
         token: '',
         message: 'password do not match',
       });
     }
   } catch (err) {
-    res.status(204).json({
+    res.status(400).json({
       token: '',
       message: 'id not registered',
     });

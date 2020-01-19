@@ -23,7 +23,7 @@ exports.all = async (req, res) => {
       message: errMsg,
     };
 
-    if (errMsg === 'JsonWebTokenError: jwt malformed') {
+    if (errMsg.substr(0, 17) === 'JsonWebTokenError') {
       res.status(401).json(response);
     } else {
       res.status(500).json(response);
@@ -53,7 +53,7 @@ exports.add = async (req, res) => {
       success: false,
     };
 
-    if (err.toString() === 'JsonWebTokenError: jwt malformed') {
+    if (err.toString().substr(0, 17) === 'JsonWebTokenError') {
       res.status(401).json(response);
     } else {
       res.status(500).json(response);
@@ -128,7 +128,7 @@ exports.category = async (req, res) => {
       success: false,
     };
 
-    if (err.toString() === 'JsonWebTokenError: jwt malformed') {
+    if (err.toString().substr(0, 17) === 'JsonWebTokenError') {
       res.status(401).json(response);
     } else {
       res.status(500).json(response);
