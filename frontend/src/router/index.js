@@ -13,7 +13,7 @@ const verify = async (to, from, next) => {
   const res = await axios.post('http://localhost:3000/api/auth/verify', {
     token: localStorage.token,
   });
-  if (!res.data.verified) {
+  if (!res.data.success) {
     next('/no-auth');
   } else {
     next();

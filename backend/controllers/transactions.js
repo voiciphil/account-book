@@ -17,10 +17,17 @@ exports.all = async (req, res) => {
       message: 'success',
     });
   } catch (err) {
-    res.json({
+    const errMsg = err.toString();
+    const response = {
       data: [],
-      message: err.toString(),
-    });
+      message: errMsg,
+    };
+
+    if (errMsg === 'JsonWebTokenError: jwt malformed') {
+      res.status(401).json(response);
+    } else {
+      res.status(500).json(response);
+    }
   }
 };
 
@@ -42,9 +49,15 @@ exports.add = async (req, res) => {
       success: true,
     });
   } catch (err) {
-    res.json({
+    const response = {
       success: false,
-    });
+    };
+
+    if (err.toString() === 'JsonWebTokenError: jwt malformed') {
+      res.status(401).json(response);
+    } else {
+      res.status(500).json(response);
+    }
   }
 };
 
@@ -61,7 +74,7 @@ exports.delete = async (req, res) => {
       success: true,
     });
   } catch (err) {
-    res.json({
+    res.status(500).json({
       success: false,
     });
   }
@@ -88,7 +101,7 @@ exports.update = async (req, res) => {
       success: true,
     });
   } catch (err) {
-    res.json({
+    res.status(500).json({
       success: false,
     });
   }
@@ -111,9 +124,14 @@ exports.category = async (req, res) => {
       success: true,
     });
   } catch (err) {
-    res.json({
-      data: [],
+    const response = {
       success: false,
-    });
+    };
+
+    if (err.toString() === 'JsonWebTokenError: jwt malformed') {
+      res.status(401).json(response);
+    } else {
+      res.status(500).json(response);
+    }
   }
 };

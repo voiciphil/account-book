@@ -24,13 +24,13 @@ exports.signIn = async (req, res) => {
         message: 'login success',
       });
     } else {
-      res.json({
+      res.status(204).json({
         token: '',
         message: 'password do not match',
       });
     }
   } catch (err) {
-    res.json({
+    res.status(204).json({
       token: '',
       message: 'id not registered',
     });
@@ -43,11 +43,11 @@ exports.verify = (req, res) => {
   try {
     jwt.verify(token, process.env.SECRETE_KEY);
     res.json({
-      verified: true,
+      success: true,
     });
   } catch (err) {
-    res.json({
-      verified: false,
+    res.status(401).json({
+      success: false,
     });
   }
 };
@@ -64,7 +64,7 @@ exports.signUp = async (req, res) => {
       success: true,
     });
   } catch (err) {
-    res.json({
+    res.status(500).json({
       success: false,
     });
   }
