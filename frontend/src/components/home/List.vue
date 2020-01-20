@@ -67,6 +67,7 @@
                   >
                     <v-text-field
                       v-model="category"
+                      v-on:keyup.enter="addTransaction"
                       color="indigo darken-3"
                       outlined
                       label="카테고리"
@@ -77,6 +78,7 @@
                   >
                     <v-text-field
                       v-model="breakdown"
+                      v-on:keyup.enter="addTransaction"
                       color="indigo darken-3"
                       outlined
                       label="내역"
@@ -92,6 +94,7 @@
                     />
                     <v-text-field
                       v-bind:label="mode ? '수입' : '지출'"
+                      v-on:keyup.enter="addTransaction"
                       v-model="price"
                       type="number"
                       color="indigo darken-3"
@@ -143,6 +146,7 @@
                   >
                     <v-text-field
                       v-model="editedItem.category"
+                      v-on:keyup.enter="editTransaction"
                       color="indigo darken-3"
                       outlined
                       label="카테고리"
@@ -153,6 +157,7 @@
                   >
                     <v-text-field
                       v-model="editedItem.breakdown"
+                      v-on:keyup.enter="editTransaction"
                       color="indigo darken-3"
                       outlined
                       label="내역"
@@ -168,6 +173,7 @@
                     />
                     <v-text-field
                       v-bind:label="mode ? '수입' : '지출'"
+                      v-on:keyup.enter="editTransaction"
                       v-model="editedItem.price"
                       type="number"
                       color="indigo darken-3"
