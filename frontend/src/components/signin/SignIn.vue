@@ -8,7 +8,6 @@
         id="card"
         width="350"
         outlined
-        color="grey lighten-5"
       >
         <v-container fluid>
           <v-row
@@ -111,20 +110,23 @@ export default {
         return;
       }
 
-      const res = await this.$axios.post('http://localhost:3000/api/auth/sign-in', {
-        id: this.id,
-        pw: Buffer.from(this.pw).toString('base64'),
-      });
-
-      if (res.data.message === 'login success') {
-        localStorage.token = res.data.token;
-        this.$router.push('/home');
-      } else if (res.data.message === 'id not registered') {
-        this.errors.notRegistered = true;
-        this.id = '';
-      } else if (res.data.message === 'password do not match') {
-        this.errors.wrongPassword = true;
-        this.pw = '';
+      try {
+        const res = await this.$axios.post('http://localhost:3000/api/auth/sign-in', {
+          id: this.id,
+          pw: Buffer.from(this.pw).toString('base64'),
+        });
+        if (res.data.message === 'login success') {
+          localStorage.token = res.data.token;
+          this.$router.push('/home');
+        } else if (res.data.message === 'id not registered') {
+          this.errors.notRegistered = true;
+          this.id = '';
+        } else if (res.data.message === 'password do not match') {
+          this.errors.wrongPassword = true;
+          this.pw = '';
+        }
+      } catch (err) {
+        console.log(err);
       }
     },
     signUp() {
@@ -147,6 +149,5 @@ export default {
 <style scoped>
 #card {
   border-color: #e0e0e0 !important;
-  background-color: #f7fff3 !important;
 }
 </style>

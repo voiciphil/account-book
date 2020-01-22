@@ -5,36 +5,50 @@
       v-bind:items="getFilteredTransactions()"
       v-bind:sort-by="['date', 'id']"
       v-bind:sort-desc="[true, true]"
-      style="background-color: #f7fff3"
+      color="light-green lighten-1"
     >
       <template v-slot:top>
+        <v-divider/>
         <v-toolbar
           flat
-          style="background-color: #f7fff3"
         >
-          <v-row no-gutters>
-            <v-col
-              class="mr-n12"
+          <v-container
+            class="sign"
+            fluid
+          >
+            <v-row
+              justify="center"
             >
-              <v-toolbar-title>
+              <v-col>
                 {{ '잔액: ' + total.toLocaleString() + '원' }}
-              </v-toolbar-title>
-            </v-col>
-            <v-col
-              class="mx-n12"
+              </v-col>
+            </v-row>
+          </v-container>
+          <v-container
+            class="sign"
+            style="color: #33691e"
+            fluid
+          >
+            <v-row
+              max-width="50"
+              justify="end"
             >
-              <v-toolbar-title>
+              <v-col>
                 {{ '수입: ' + income.toLocaleString() + '원' }}
-              </v-toolbar-title>
-            </v-col>
-            <v-col
-              class="ml-n12"
-            >
-              <v-toolbar-title>
+              </v-col>
+            </v-row>
+          </v-container>
+          <v-container
+            class="sign"
+            style="color: #b71c1c"
+            fluid
+          >
+            <v-row max-width="50">
+              <v-col>
                 {{ '지출: ' + ((-expenditure + 1) - 1).toLocaleString() + '원' }}
-              </v-toolbar-title>
-            </v-col>
-          </v-row>
+              </v-col>
+            </v-row>
+          </v-container>
           <v-spacer/>
           <v-dialog
             v-model="dialog"
@@ -217,6 +231,7 @@
             </v-card>
           </v-dialog>
         </v-toolbar>
+        <v-divider/>
       </template>
       <template v-slot:item.action="{ item }">
         <v-icon
@@ -432,6 +447,11 @@ export default {
 .dialog {
   margin-right: 1px !important;
   margin-left: 1px !important;
-  background-color: #f7fff3 !important;
+  background-color: #ffffff !important;
+}
+.sign {
+  width: 200px;
+  text-align: center;
+  font-size: 18px;
 }
 </style>

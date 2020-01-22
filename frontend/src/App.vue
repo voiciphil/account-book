@@ -54,6 +54,6 @@ export default {
 
 <style scoped>
 #main {
-  background-color: #f7fff3
+  background-color: #ffffff !important;
 }
 </style>

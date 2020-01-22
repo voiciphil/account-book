@@ -138,6 +138,5 @@ export default {
 <style>
 #card {
   border-color: #e0e0e0 !important;
-  background-color: #f7fff3 !important;
 }
 </style>
