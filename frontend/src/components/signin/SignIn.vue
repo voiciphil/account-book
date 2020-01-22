@@ -16,8 +16,6 @@
             <v-col>
               <v-text-field
                 v-model="id"
-                v-bind:rules="[rules.idError, rules.required]"
-                v-bind:error="errors.id"
                 v-on:keyup.enter="login"
                 color="light-green lighten-1"
                 label="아이디"
@@ -33,8 +31,6 @@
             <v-col>
               <v-text-field
                 v-model="pw"
-                v-bind:rules="[rules.pwError, rules.required]"
-                v-bind:error="errors.pw"
                 v-on:keyup.enter="login"
                 color="light-green lighten-1"
                 label="비밀번호"
@@ -57,7 +53,6 @@
                 dark
                 block
                 depressed
-                width="90px"
               >로그인</v-btn>
             </v-col>
           </v-row>
@@ -71,7 +66,6 @@
                 color="light-green lighten-1"
                 block
                 outlined
-                width="90px"
               >회원가입</v-btn>
             </v-col>
           </v-row>
@@ -87,30 +81,10 @@ export default {
     return {
       id: '',
       pw: '',
-      rules: {
-        required: value => !!value || '입력해 주세요.',
-        idError: () => !this.errors.notRegistered || '등록되지 않은 아이디입니다.',
-        pwError: () => !this.errors.wrongPassword || '비밀번호가 일치하지 않습니다.',
-      },
-      errors: {
-        id: false,
-        pw: false,
-        notRegistered: false,
-        wrongPassword: false,
-      },
     };
   },
   methods: {
     async login() {
-      this.errors.id = this.id === '';
-      this.errors.pw = this.pw === '';
-      this.errors.notRegistered = false;
-      this.errors.wrongPassword = false;
-
-      if (this.errors.id || this.errors.pw) {
-        return;
-      }
-
       try {
         const res = await this.$axios.post('http://localhost:3000/api/auth/sign-in', {
           id: this.id,
@@ -119,30 +93,17 @@ export default {
         if (res.data.message === 'login success') {
           localStorage.token = res.data.token;
           this.$router.push('/home');
-        } else if (res.data.message === 'id not registered') {
-          this.errors.notRegistered = true;
-          this.id = '';
-        } else if (res.data.message === 'password do not match') {
-          this.errors.wrongPassword = true;
-          this.pw = '';
         }
       } catch (err) {
-        console.log(err);
+        this.id = '';
+        this.pw = '';
+        // eslint-disable-next-line
+        alert('아이디 또는 비밀번호를 확인해 주세요.');
       }
     },
     signUp() {
       this.$router.push('/sign-up');
     },
-  },
-  updated() {
-    if (this.id !== '') {
-      this.errors.id = false;
-      this.errors.notRegistered = false;
-    }
-    if (this.pw !== '') {
-      this.errors.pw = false;
-      this.errors.wrongPassword = false;
-    }
   },
 };
 </script>
