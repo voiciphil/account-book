@@ -1,8 +1,10 @@
 <template>
-  <v-app>
+  <v-app
+    id="main"
+  >
     <v-app-bar
       app
-      color="indigo"
+      color="light-green lighten-1"
       dark
     >
       <v-toolbar-title
@@ -49,3 +51,9 @@ export default {
   },
 };
 </script>
+
+<style scoped>
+#main {
+  background-color: #f7fff3
+}
+</style>

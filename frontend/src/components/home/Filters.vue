@@ -22,14 +22,14 @@
               outlined
               dense
               v-on="on"
-              color="indigo"
+              color="light-green lighten-1"
             />
           </template>
           <v-date-picker
             v-model="month"
             v-on:input="filtrate"
             type="month"
-            color="indigo"
+            color="light-green lighten-1"
             locale="ko-kr"
           />
         </v-menu>
@@ -43,7 +43,7 @@
             v-model="category"
             v-on:input="filtrate"
             label="카테고리"
-            color="indigo"
+            color="light-green lighten-1"
             outlined
             dense
           />

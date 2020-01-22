@@ -5,11 +5,12 @@
       v-bind:items="getFilteredTransactions()"
       v-bind:sort-by="['date', 'id']"
       v-bind:sort-desc="[true, true]"
+      style="background-color: #f7fff3"
     >
       <template v-slot:top>
         <v-toolbar
           flat
-          color="white"
+          style="background-color: #f7fff3"
         >
           <v-row no-gutters>
             <v-col
@@ -42,7 +43,7 @@
             <template v-slot:activator="{ on }">
               <v-toolbar-items>
                 <v-btn
-                  color="indigo"
+                  color="light-green lighten-1"
                   depressed
                   dark
                   v-on="on"
@@ -60,7 +61,7 @@
                 <v-col>
                   <v-date-picker
                     v-model="picker"
-                    color="indigo"
+                    color="light-green lighten-1"
                   />
                 </v-col>
                 <v-col class="mr-3">
@@ -70,7 +71,7 @@
                     <v-text-field
                       v-model="category"
                       v-on:keyup.enter="addTransaction"
-                      color="indigo"
+                      color="light-green lighten-1"
                       outlined
                       label="카테고리"
                     />
@@ -81,7 +82,7 @@
                     <v-text-field
                       v-model="breakdown"
                       v-on:keyup.enter="addTransaction"
-                      color="indigo"
+                      color="light-green lighten-1"
                       outlined
                       label="내역"
                     />
@@ -92,34 +93,38 @@
                     <v-switch
                       v-model="mode"
                       inset
-                      color="indigo"
+                      color="light-green lighten-1"
                     />
                     <v-text-field
                       v-bind:label="mode ? '수입' : '지출'"
                       v-on:keyup.enter="addTransaction"
                       v-model="price"
                       type="number"
-                      color="indigo"
+                      color="light-green lighten-1"
                       outlined
                     />
                   </v-row>
                   <v-row
                     class="mt-4"
-                    justify="end"
+                    justify="center"
                   >
-                    <v-card-actions>
+                    <v-col>
                       <v-btn
                         v-on:click="dialog = false"
                         class="mr-2"
-                        color="indigo"
-                        text
+                        color="light-green lighten-1"
+                        block
+                        dark
                       >취소</v-btn>
+                    </v-col>
+                    <v-col>
                       <v-btn
                         v-on:click="addTransaction"
-                        color="indigo"
-                        text
+                        color="light-green lighten-1"
+                        block
+                        dark
                       >확인</v-btn>
-                    </v-card-actions>
+                    </v-col>
                   </v-row>
                 </v-col>
               </v-row>
@@ -140,7 +145,7 @@
                 <v-col>
                   <v-date-picker
                     v-model="editedItem.date"
-                    color="indigo"
+                    color="light-green lighten-1"
                   />
                 </v-col>
                 <v-col
@@ -152,7 +157,7 @@
                     <v-text-field
                       v-model="editedItem.category"
                       v-on:keyup.enter="editTransaction"
-                      color="indigo"
+                      color="light-green lighten-1"
                       outlined
                       label="카테고리"
                     />
@@ -163,7 +168,7 @@
                     <v-text-field
                       v-model="editedItem.breakdown"
                       v-on:keyup.enter="editTransaction"
-                      color="indigo"
+                      color="light-green lighten-1"
                       outlined
                       label="내역"
                     />
@@ -174,14 +179,14 @@
                     <v-switch
                       v-model="mode"
                       inset
-                      color="indigo"
+                      color="light-green lighten-1"
                     />
                     <v-text-field
                       v-bind:label="mode ? '수입' : '지출'"
                       v-on:keyup.enter="editTransaction"
                       v-model="editedItem.price"
                       type="number"
-                      color="indigo"
+                      color="light-green lighten-1"
                       outlined
                     />
                   </v-row>
@@ -189,19 +194,23 @@
                     class="mt-4"
                     justify="end"
                   >
-                    <v-card-actions>
+                    <v-col>
                       <v-btn
                         v-on:click="editDialog = mode = false"
                         class="mr-2"
-                        color="indigo"
-                        text
+                        color="light-green lighten-1"
+                        block
+                        dark
                       >취소</v-btn>
+                    </v-col>
+                    <v-col>
                       <v-btn
                         v-on:click="editTransaction"
-                        color="indigo"
-                        text
+                        color="light-green lighten-1"
+                        block
+                        dark
                       >확인</v-btn>
-                    </v-card-actions>
+                    </v-col>
                   </v-row>
                 </v-col>
               </v-row>
@@ -423,5 +432,6 @@ export default {
 .dialog {
   margin-right: 1px !important;
   margin-left: 1px !important;
+  background-color: #f7fff3 !important;
 }
 </style>

@@ -7,7 +7,6 @@
       id="card"
       width="350"
       outlined
-      color="grey lighten-5"
     >
       <v-container fluid>
         <v-row
@@ -19,7 +18,7 @@
               v-on:keyup.enter="signUp"
               v-bind:rules="[rules.duplicated, rules.required]"
               v-bind:error="errors.id"
-              color="indigo"
+              color="light-green lighten-1"
               label="아이디"
               outlined
               dense
@@ -38,7 +37,7 @@
               v-on:keyup.enter="signUp"
               v-bind:rules="[rules.required]"
               v-bind:error="errors.pw"
-              color="indigo"
+              color="light-green lighten-1"
               label="비밀번호"
               type="password"
               outlined
@@ -58,7 +57,7 @@
               v-on:keyup.enter="signUp"
               v-bind:rules="[rules.required, rules.different]"
               v-bind:error="errors.repw"
-              color="indigo"
+              color="light-green lighten-1"
               label="비밀번호 재입력"
               type="password"
               outlined
@@ -68,14 +67,16 @@
             />
           </v-col>
         </v-row>
+      </v-container>
+      <v-divider class="mt-n4"/>
+      <v-container fluid>
         <v-row
-          class="mt-n2"
           justify="center"
         >
           <v-col>
             <v-btn
               v-on:click="signUp"
-              color="indigo"
+              color="light-green lighten-1"
               dark
               block
               width="90px"
@@ -137,5 +138,6 @@ export default {
 <style>
 #card {
   border-color: #e0e0e0 !important;
+  background-color: #f7fff3 !important;
 }
 </style>

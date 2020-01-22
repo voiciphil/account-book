@@ -1,28 +1,40 @@
 <template>
   <div>
-    <v-container fluid>
-      <v-row
-        class="mt-10"
-        justify="center"
+    <v-row
+      class="mt-10"
+      justify="center"
+    >
+      <v-card
+        id="card"
+        color="grey lighten-5"
+        outlined
+        width="300"
       >
-        <span
-          class="title font-weight-regular"
-        >회원가입이 완료되었습니다.</span>
-      </v-row>
-      <v-row
-        class="mt-3"
-        justify="center"
-      >
-        <v-btn
-          v-on:click="home"
-          small
-          rounded
-          outlined
-          color="indigo darken-3"
-          dark
-        >확인</v-btn>
-      </v-row>
-    </v-container>
+        <v-container fluid>
+          <v-row
+            justify="center"
+          >
+            <span
+              class="title font-weight-regular"
+            >회원가입이 완료되었습니다.</span>
+          </v-row>
+          <v-row
+            class="mt-3 mb-n2"
+            justify="center"
+          >
+            <v-col>
+              <v-btn
+                v-on:click="home"
+                block
+                small
+                color="light-green lighten-1"
+                dark
+              >확인</v-btn>
+            </v-col>
+          </v-row>
+        </v-container>
+      </v-card>
+    </v-row>
   </div>
 </template>
 
