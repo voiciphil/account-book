@@ -56,6 +56,7 @@
                 color="light-green lighten-1"
                 dark
                 block
+                depressed
                 width="90px"
               >로그인</v-btn>
             </v-col>
@@ -68,8 +69,8 @@
               <v-btn
                 v-on:click="signUp"
                 color="light-green lighten-1"
-                dark
                 block
+                outlined
                 width="90px"
               >회원가입</v-btn>
             </v-col>

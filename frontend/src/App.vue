@@ -6,6 +6,7 @@
       app
       color="light-green lighten-1"
       dark
+      elevation="3"
     >
       <v-toolbar-title
         class="headline"

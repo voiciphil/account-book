@@ -6,7 +6,6 @@
     >
       <v-card
         id="card"
-        color="grey lighten-5"
         outlined
         width="250"
       >
@@ -25,10 +24,10 @@
             <v-col>
               <v-btn
                 v-on:click="home"
-                small
                 block
                 color="light-green lighten-1"
                 dark
+                depressed
               >확인</v-btn>
             </v-col>
           </v-row>

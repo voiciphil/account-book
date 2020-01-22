@@ -79,6 +79,7 @@
               color="light-green lighten-1"
               dark
               block
+              depressed
               width="90px"
             >회원가입</v-btn>
           </v-col>
