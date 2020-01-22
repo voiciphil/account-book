@@ -1,60 +1,80 @@
 <template>
-  <v-container fluid>
-    <v-row
-      class="mx-10 mt-7"
-      justify="center"
+  <v-row
+    class="mt-10"
+    justify="center"
+  >
+    <v-card
+      id="card"
+      width="350"
+      outlined
+      color="grey lighten-5"
     >
-      <v-col cols="3">
-        <v-text-field
-          v-model="id"
-          v-bind:rules="[rules.idError, rules.required]"
-          v-bind:error="errors.id"
-          v-on:keyup.enter="login"
-          color="indigo darken-3"
-          label="아이디"
-          outlined
-          dense
-        />
-      </v-col>
-    </v-row>
-    <v-row
-      class="mx-10 mt-n5"
-      justify="center"
-    >
-      <v-col cols="3">
-        <v-text-field
-          v-model="pw"
-          v-bind:rules="[rules.pwError, rules.required]"
-          v-bind:error="errors.pw"
-          v-on:keyup.enter="login"
-          color="indigo darken-3"
-          label="비밀번호"
-          type="password"
-          outlined
-          dense
-        />
-      </v-col>
-    </v-row>
-    <v-row
-      class="mx-10 mt-n2"
-      justify="center"
-    >
-      <v-btn
-        class="mr-2"
-        v-on:click="login"
-        color="indigo darken-3"
-        dark
-        width="90px"
-      >로그인</v-btn>
-      <v-btn
-        class="ml-2"
-        v-on:click="signUp"
-        color="indigo darken-3"
-        dark
-        width="90px"
-      >회원가입</v-btn>
-    </v-row>
-  </v-container>
+      <v-container fluid>
+        <v-row
+          justify="center"
+        >
+          <v-col>
+            <v-text-field
+              v-model="id"
+              v-bind:rules="[rules.idError, rules.required]"
+              v-bind:error="errors.id"
+              v-on:keyup.enter="login"
+              color="indigo"
+              label="아이디"
+              outlined
+              dense
+            />
+          </v-col>
+        </v-row>
+        <v-row
+          class="mt-n5"
+          justify="center"
+        >
+          <v-col>
+            <v-text-field
+              v-model="pw"
+              v-bind:rules="[rules.pwError, rules.required]"
+              v-bind:error="errors.pw"
+              v-on:keyup.enter="login"
+              color="indigo"
+              label="비밀번호"
+              type="password"
+              outlined
+              dense
+            />
+          </v-col>
+        </v-row>
+        <v-row
+          class="mt-n2"
+          justify="center"
+        >
+          <v-col>
+            <v-btn
+              v-on:click="login"
+              color="indigo"
+              dark
+              block
+              width="90px"
+            >로그인</v-btn>
+          </v-col>
+        </v-row>
+        <v-row
+          class="mt-n3"
+          justify="center"
+        >
+          <v-col>
+            <v-btn
+              v-on:click="signUp"
+              color="indigo"
+              dark
+              block
+              width="90px"
+            >회원가입</v-btn>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-card>
+  </v-row>
 </template>
 
 <script>
@@ -120,6 +140,8 @@ export default {
 };
 </script>
 
-<style>
-
+<style scoped>
+#card {
+  border-color: #e0e0e0 !important;
+}
 </style>

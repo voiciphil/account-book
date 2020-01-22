@@ -2,7 +2,7 @@
   <v-app>
     <v-app-bar
       app
-      color="indigo darken-3"
+      color="indigo"
       dark
     >
       <v-toolbar-title

@@ -1,78 +1,90 @@
 <template>
-  <v-container fluid>
-    <v-row
-      class="mx-10 mt-7"
-      justify="center"
+  <v-row
+    class="mt-10"
+    justify="center"
+  >
+    <v-card
+      id="card"
+      width="350"
+      outlined
+      color="grey lighten-5"
     >
-      <v-col cols="3">
-        <v-text-field
-          v-model="id"
-          v-on:keyup.enter="signUp"
-          v-bind:rules="[rules.duplicated, rules.required]"
-          v-bind:error="errors.id"
-          color="indigo darken-3"
-          label="아이디"
-          outlined
-          dense
-          counter
-          maxlength="20"
-        />
-      </v-col>
-    </v-row>
-    <v-row
-      class="mx-10 mt-n5"
-      justify="center"
-    >
-      <v-col cols="3">
-        <v-text-field
-          v-model="pw"
-          v-on:keyup.enter="signUp"
-          v-bind:rules="[rules.required]"
-          v-bind:error="errors.pw"
-          color="indigo darken-3"
-          label="비밀번호"
-          type="password"
-          outlined
-          dense
-          counter
-          maxlength="20"
-        />
-      </v-col>
-    </v-row>
-    <v-row
-      class="mx-10 mt-n5"
-      justify="center"
-    >
-      <v-col cols="3">
-        <v-text-field
-          v-model="repw"
-          v-on:keyup.enter="signUp"
-          v-bind:rules="[rules.required, rules.different]"
-          v-bind:error="errors.repw"
-          color="indigo darken-3"
-          label="비밀번호 재입력"
-          type="password"
-          outlined
-          dense
-          counter
-          maxlength="20"
-        />
-      </v-col>
-    </v-row>
-    <v-row
-      class="mx-10 mt-n2"
-      justify="center"
-    >
-      <v-btn
-        v-on:click="signUp"
-        color="indigo darken-3"
-        dark
-        rounded
-        outlined
-        width="90px"
-      >회원가입</v-btn>
-    </v-row>
-  </v-container>
+      <v-container fluid>
+        <v-row
+          justify="center"
+        >
+          <v-col>
+            <v-text-field
+              v-model="id"
+              v-on:keyup.enter="signUp"
+              v-bind:rules="[rules.duplicated, rules.required]"
+              v-bind:error="errors.id"
+              color="indigo"
+              label="아이디"
+              outlined
+              dense
+              counter
+              maxlength="20"
+            />
+          </v-col>
+        </v-row>
+        <v-row
+          class="mt-n5"
+          justify="center"
+        >
+          <v-col>
+            <v-text-field
+              v-model="pw"
+              v-on:keyup.enter="signUp"
+              v-bind:rules="[rules.required]"
+              v-bind:error="errors.pw"
+              color="indigo"
+              label="비밀번호"
+              type="password"
+              outlined
+              dense
+              counter
+              maxlength="20"
+            />
+          </v-col>
+        </v-row>
+        <v-row
+          class="mt-n5"
+          justify="center"
+        >
+          <v-col>
+            <v-text-field
+              v-model="repw"
+              v-on:keyup.enter="signUp"
+              v-bind:rules="[rules.required, rules.different]"
+              v-bind:error="errors.repw"
+              color="indigo"
+              label="비밀번호 재입력"
+              type="password"
+              outlined
+              dense
+              counter
+              maxlength="20"
+            />
+          </v-col>
+        </v-row>
+        <v-row
+          class="mt-n2"
+          justify="center"
+        >
+          <v-col>
+            <v-btn
+              v-on:click="signUp"
+              color="indigo"
+              dark
+              block
+              width="90px"
+            >회원가입</v-btn>
+          </v-col>
+        </v-row>
+      </v-container>
+    </v-card>
+  </v-row>
 </template>
 
 <script>
@@ -123,5 +135,7 @@ export default {
 </script>
 
 <style>
-
+#card {
+  border-color: #e0e0e0 !important;
+}
 </style>

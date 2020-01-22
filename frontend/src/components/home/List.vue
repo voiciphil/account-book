@@ -42,33 +42,35 @@
             <template v-slot:activator="{ on }">
               <v-toolbar-items>
                 <v-btn
-                  color="indigo darken-4"
+                  color="indigo"
+                  depressed
                   dark
                   v-on="on"
                 >내역 추가</v-btn>
               </v-toolbar-items>
             </template>
             <v-card
-              color="grey lighten-4"
+              color="grey lighten-5"
+              outlined
             >
               <v-row
-                class="mx-3"
+                class="dialog"
                 align="center"
               >
-                <v-col cols="6">
+                <v-col>
                   <v-date-picker
                     v-model="picker"
-                    color="indigo darken-3"
+                    color="indigo"
                   />
                 </v-col>
-                <v-col class="mr-2">
+                <v-col class="mr-3">
                   <v-row
                     class="mb-4"
                   >
                     <v-text-field
                       v-model="category"
                       v-on:keyup.enter="addTransaction"
-                      color="indigo darken-3"
+                      color="indigo"
                       outlined
                       label="카테고리"
                     />
@@ -79,7 +81,7 @@
                     <v-text-field
                       v-model="breakdown"
                       v-on:keyup.enter="addTransaction"
-                      color="indigo darken-3"
+                      color="indigo"
                       outlined
                       label="내역"
                     />
@@ -90,14 +92,14 @@
                     <v-switch
                       v-model="mode"
                       inset
-                      color="indigo darken-3"
+                      color="indigo"
                     />
                     <v-text-field
                       v-bind:label="mode ? '수입' : '지출'"
                       v-on:keyup.enter="addTransaction"
                       v-model="price"
                       type="number"
-                      color="indigo darken-3"
+                      color="indigo"
                       outlined
                     />
                   </v-row>
@@ -109,12 +111,12 @@
                       <v-btn
                         v-on:click="dialog = false"
                         class="mr-2"
-                        color="indigo darken-3"
+                        color="indigo"
                         text
                       >취소</v-btn>
                       <v-btn
                         v-on:click="addTransaction"
-                        color="indigo darken-3"
+                        color="indigo"
                         text
                       >확인</v-btn>
                     </v-card-actions>
@@ -128,26 +130,29 @@
             width="675"
           >
             <v-card
-              color="grey lighten-4"
+              color="grey lighten-5"
+              outlined
             >
               <v-row
-                class="mx-3"
+                class="dialog"
                 align="center"
               >
-                <v-col cols="6">
+                <v-col>
                   <v-date-picker
                     v-model="editedItem.date"
-                    color="indigo darken-3"
+                    color="indigo"
                   />
                 </v-col>
-                <v-col class="mr-2">
+                <v-col
+                  class="mr-3"
+                >
                   <v-row
                     class="mb-4"
                   >
                     <v-text-field
                       v-model="editedItem.category"
                       v-on:keyup.enter="editTransaction"
-                      color="indigo darken-3"
+                      color="indigo"
                       outlined
                       label="카테고리"
                     />
@@ -158,7 +163,7 @@
                     <v-text-field
                       v-model="editedItem.breakdown"
                       v-on:keyup.enter="editTransaction"
-                      color="indigo darken-3"
+                      color="indigo"
                       outlined
                       label="내역"
                     />
@@ -169,14 +174,14 @@
                     <v-switch
                       v-model="mode"
                       inset
-                      color="indigo darken-3"
+                      color="indigo"
                     />
                     <v-text-field
                       v-bind:label="mode ? '수입' : '지출'"
                       v-on:keyup.enter="editTransaction"
                       v-model="editedItem.price"
                       type="number"
-                      color="indigo darken-3"
+                      color="indigo"
                       outlined
                     />
                   </v-row>
@@ -188,12 +193,12 @@
                       <v-btn
                         v-on:click="editDialog = mode = false"
                         class="mr-2"
-                        color="indigo darken-3"
+                        color="indigo"
                         text
                       >취소</v-btn>
                       <v-btn
                         v-on:click="editTransaction"
-                        color="indigo darken-3"
+                        color="indigo"
                         text
                       >확인</v-btn>
                     </v-card-actions>
@@ -415,5 +420,8 @@ export default {
 </script>
 
 <style scoped>
-
+.dialog {
+  margin-right: 1px !important;
+  margin-left: 1px !important;
+}
 </style>
