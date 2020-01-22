@@ -44,8 +44,6 @@
         v-on:click="login"
         color="indigo darken-3"
         dark
-        rounded
-        outlined
         width="90px"
       >로그인</v-btn>
       <v-btn
@@ -53,8 +51,6 @@
         v-on:click="signUp"
         color="indigo darken-3"
         dark
-        rounded
-        outlined
         width="90px"
       >회원가입</v-btn>
     </v-row>
