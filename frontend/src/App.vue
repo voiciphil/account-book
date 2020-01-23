@@ -7,6 +7,7 @@
       color="light-green lighten-1"
       dark
       elevation="3"
+      height="55"
     >
       <v-toolbar-title
         class="headline"
