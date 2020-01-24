@@ -10,7 +10,7 @@ import SignedUp from '../views/SIgnedUp.vue';
 Vue.use(VueRouter);
 
 const verify = async (to, from, next) => {
-  const res = await axios.post('http://localhost:3000/api/auth/verify', {
+  const res = await axios.post('/api/auth/verify', {
     token: localStorage.token,
   });
   if (!res.data.success) {

@@ -330,7 +330,7 @@ export default {
   },
   methods: {
     async getTransactions() {
-      const res = await this.$axios.post('http://localhost:3000/api/transactions/all', {
+      const res = await this.$axios.post('/api/transactions/all', {
         token: localStorage.token,
       });
 
@@ -344,7 +344,7 @@ export default {
       }
     },
     async addTransaction() {
-      const res = await this.$axios.post('http://localhost:3000/api/transactions/add', {
+      const res = await this.$axios.post('/api/transactions/add', {
         token: localStorage.token,
         date: this.picker,
         category: this.category,
@@ -370,7 +370,7 @@ export default {
       }
     },
     async deleteTransaction(item) {
-      const res = await this.$axios.post('http://localhost:3000/api/transactions/delete', {
+      const res = await this.$axios.post('/api/transactions/delete', {
         id: item.id,
       });
 
@@ -381,7 +381,7 @@ export default {
     },
     async editTransaction() {
       this.editedItem.price = this.mode ? this.editedItem.price : -this.editedItem.price;
-      const res = await this.$axios.post('http://localhost:3000/api/transactions/update', this.editedItem);
+      const res = await this.$axios.post('/api/transactions/update', this.editedItem);
 
       if (res.data.success) {
         this.editDialog = false;

@@ -86,7 +86,7 @@ export default {
   methods: {
     async login() {
       try {
-        const res = await this.$axios.post('http://localhost:3000/api/auth/sign-in', {
+        const res = await this.$axios.post('/api/auth/sign-in', {
           id: this.id,
           pw: Buffer.from(this.pw).toString('base64'),
         });

@@ -97,7 +97,7 @@ export default {
       if (this.id !== '' && this.pw !== '' && this.repw !== '') {
         if (this.pw === this.repw) {
           try {
-            await this.$axios.post('http://localhost:3000/api/auth/sign-up', {
+            await this.$axios.post('/api/auth/sign-up', {
               id: this.id,
               pw: this.pw,
             });
