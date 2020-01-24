@@ -20,7 +20,7 @@ exports.signIn = async (req, res) => {
         expiresIn: '60m',
       };
       res.json({
-        token: jwt.sign(payload, process.env.SECRETE_KEY, option),
+        token: jwt.sign(payload, process.env.SECRET_KEY, option),
         message: 'login success',
       });
     } else {
@@ -41,7 +41,7 @@ exports.verify = (req, res) => {
   const { token } = req.body;
 
   try {
-    jwt.verify(token, process.env.SECRETE_KEY);
+    jwt.verify(token, process.env.SECRET_KEY);
     res.json({
       success: true,
     });
