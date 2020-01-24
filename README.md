@@ -15,26 +15,17 @@ npm run build
 cd ../backend
 npm install
 ```
-4. MySQL 환경설정 파일을 생성한다.
-* backend/db-config.json
-```
-{
-  "development": {
-    "username": "root",
-    "password": "비밀번호",
-    "database": "데이터베이스 이름",
-    "host": "127.0.0.1",
-    "dialect": "mysql",
-    "operatorAliases": false
-  }
-}
-```
-5. .env 파일을 생성하여 jwt의 키를 생성한다.
+4. .env 파일을 생성하여 jwt의 키와 데이터베이스 정보를 입력한다.  
+입력하지 않으면 기본값으로 생성된다.
 * backend/.env
 ```
-SECRETE_KEY="임의의 비밀 키"
+SECRETE_KEY='임의의 비밀 키'
+MYSQL_USERNAME='MySQL 사용자 이름' (기본값: 'root')
+MYSQL_PASSWORD='MySQL 비밀번호' (기본값: '')
+MYSQL_DATABASE='MySQL 스키마 이름' (기본값: 'account-book')
+MYSQL_HOST='MySQL 서버 주소' (기본값: '127.0.0.1')
 ```
-6. 서버를 실행한다.
+5. 서버를 실행한다.
 ```
 npm start
 ```
