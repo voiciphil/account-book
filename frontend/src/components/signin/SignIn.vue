@@ -95,10 +95,16 @@ export default {
           this.$router.push('/home');
         }
       } catch (err) {
-        this.id = '';
-        this.pw = '';
-        // eslint-disable-next-line
-        alert('아이디 또는 비밀번호를 확인해 주세요.');
+        if (err.response.data.message === 'id not registered') {
+          // eslint-disable-next-line
+          alert('등록되지 않은 아이디 입니다.');
+          this.id = '';
+          this.pw = '';
+        } else {
+          // eslint-disable-next-line no-alert
+          alert('비밀번호가 잘못되었습니다.');
+          this.pw = '';
+        }
       }
     },
     signUp() {
