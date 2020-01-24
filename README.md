@@ -19,7 +19,7 @@ npm install
 입력하지 않으면 기본값으로 생성된다.
 * backend/.env
 ```
-SECRETE_KEY='임의의 비밀 키'
+SECRET_KEY='임의의 비밀 키'
 MYSQL_USERNAME='MySQL 사용자 이름' (기본값: 'root')
 MYSQL_PASSWORD='MySQL 비밀번호' (기본값: '')
 MYSQL_DATABASE='MySQL 스키마 이름' (기본값: 'account-book')
