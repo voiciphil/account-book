@@ -103,8 +103,5 @@ dist
 # TernJS port file
 .tern-port
 
-# DB config files
-db-config.json
-
 # Frontend build output
 backend/public/
