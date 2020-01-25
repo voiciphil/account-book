@@ -74,8 +74,10 @@ export default {
   },
   methods: {
     async getCategories() {
-      const res = await this.$axios.post('/api/transactions/category', {
-        token: localStorage.token,
+      const res = await this.$axios.get('/api/transactions/category', {
+        headers: {
+          'x-access-token': localStorage.token,
+        },
       });
 
       this.categories = [];

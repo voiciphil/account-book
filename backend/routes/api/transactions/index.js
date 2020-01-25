@@ -1,23 +1,23 @@
 const router = require('express').Router();
 const controller = require('../../../controllers');
 
-router.post('/all', (req, res) => {
+router.get('/', (req, res) => {
   controller.transactions.all(req, res);
 });
 
-router.post('/add', (req, res) => {
+router.post('/', (req, res) => {
   controller.transactions.add(req, res);
 });
 
-router.post('/delete', (req, res) => {
+router.delete('/:id', (req, res) => {
   controller.transactions.delete(req, res);
 });
 
-router.post('/update', (req, res) => {
+router.patch('/:id', (req, res) => {
   controller.transactions.update(req, res);
 });
 
-router.post('/category', (req, res) => {
+router.get('/category', (req, res) => {
   controller.transactions.category(req, res);
 });
 

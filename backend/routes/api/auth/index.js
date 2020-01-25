@@ -5,7 +5,7 @@ router.post('/sign-in', (req, res) => {
   controller.auth.signIn(req, res);
 });
 
-router.post('/verify', (req, res) => {
+router.get('/', (req, res) => {
   controller.auth.verify(req, res);
 });
 

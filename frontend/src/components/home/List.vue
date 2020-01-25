@@ -330,8 +330,10 @@ export default {
   },
   methods: {
     async getTransactions() {
-      const res = await this.$axios.post('/api/transactions/all', {
-        token: localStorage.token,
+      const res = await this.$axios.get('/api/transactions', {
+        headers: {
+          'x-access-token': localStorage.token,
+        },
       });
 
       this.transactions = res.data.data;
@@ -344,12 +346,15 @@ export default {
       }
     },
     async addTransaction() {
-      const res = await this.$axios.post('/api/transactions/add', {
-        token: localStorage.token,
+      const res = await this.$axios.post('/api/transactions', {
         date: this.picker,
         category: this.category,
         breakdown: this.breakdown,
         price: this.mode ? this.price : -this.price,
+      }, {
+        headers: {
+          'x-access-token': localStorage.token,
+        },
       });
 
       if (res.data.success) {
@@ -370,8 +375,10 @@ export default {
       }
     },
     async deleteTransaction(item) {
-      const res = await this.$axios.post('/api/transactions/delete', {
-        id: item.id,
+      const res = await this.$axios.delete(`/api/transactions/${item.id}`, {
+        headers: {
+          'x-access-token': localStorage.token,
+        },
       });
 
       if (res.data.success) {
@@ -381,7 +388,13 @@ export default {
     },
     async editTransaction() {
       this.editedItem.price = this.mode ? this.editedItem.price : -this.editedItem.price;
-      const res = await this.$axios.post('/api/transactions/update', this.editedItem);
+      const res = await this.$axios.patch(`/api/transactions/${this.editedItem.id}`,
+        this.editedItem,
+        {
+          headers: {
+            'x-access-token': localStorage.token,
+          },
+        });
 
       if (res.data.success) {
         this.editDialog = false;

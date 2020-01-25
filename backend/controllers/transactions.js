@@ -2,7 +2,7 @@ const jwt = require('jsonwebtoken');
 const db = require('../models');
 
 exports.all = async (req, res) => {
-  const { token } = req.body;
+  const token = req.headers['x-access-token'];
 
   try {
     const payload = jwt.verify(token, process.env.SECRET_KEY);
@@ -32,8 +32,9 @@ exports.all = async (req, res) => {
 };
 
 exports.add = async (req, res) => {
+  const token = req.headers['x-access-token'];
   const {
-    token, date, category, breakdown, price,
+    date, category, breakdown, price,
   } = req.body;
 
   try {
@@ -62,9 +63,11 @@ exports.add = async (req, res) => {
 };
 
 exports.delete = async (req, res) => {
-  const { id } = req.body;
+  const token = req.headers['x-access-token'];
+  const { id } = req.params;
 
   try {
+    jwt.verify(token, process.env.SECRET_KEY);
     await db.transactions.destroy({
       where: {
         id: parseInt(id, 10),
@@ -81,11 +84,14 @@ exports.delete = async (req, res) => {
 };
 
 exports.update = async (req, res) => {
+  const token = req.headers['x-access-token'];
   const {
-    id, date, category, breakdown, price,
+    date, category, breakdown, price,
   } = req.body;
+  const { id } = req.params;
 
   try {
+    jwt.verify(token, process.env.SECRET_KEY);
     await db.transactions.update({
       date,
       category,
@@ -108,7 +114,7 @@ exports.update = async (req, res) => {
 };
 
 exports.category = async (req, res) => {
-  const { token } = req.body;
+  const token = req.headers['x-access-token'];
 
   try {
     const payload = jwt.verify(token, process.env.SECRET_KEY);

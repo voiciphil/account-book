@@ -10,13 +10,15 @@ import SignedUp from '../views/SIgnedUp.vue';
 Vue.use(VueRouter);
 
 const verify = async (to, from, next) => {
-  const res = await axios.post('/api/auth/verify', {
-    token: localStorage.token,
-  });
-  if (!res.data.success) {
-    next('/no-auth');
-  } else {
+  try {
+    await axios.get('/api/auth', {
+      headers: {
+        'x-access-token': localStorage.token,
+      },
+    });
     next();
+  } catch (err) {
+    next('/no-auth');
   }
 };
 

@@ -38,7 +38,7 @@ exports.signIn = async (req, res) => {
 };
 
 exports.verify = (req, res) => {
-  const { token } = req.body;
+  const token = req.headers['x-access-token'];
 
   try {
     jwt.verify(token, process.env.SECRET_KEY);
