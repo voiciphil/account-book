@@ -3,7 +3,7 @@ const db = require('../models');
 require('dotenv').config();
 
 exports.signIn = async (req, res) => {
-  const { id, pw } = req.body;
+  const { id, token } = req.body;
 
   try {
     const user = await db.users.findOne({
@@ -12,27 +12,22 @@ exports.signIn = async (req, res) => {
       },
     });
 
-    if (user.user_pw === Buffer.from(pw, 'base64').toString('ascii')) {
-      const payload = {
-        user_id: user.user_id,
-      };
-      const option = {
-        expiresIn: '60m',
-      };
-      res.json({
-        token: jwt.sign(payload, process.env.SECRET_KEY, option),
-        message: 'login success',
-      });
-    } else {
-      res.status(400).json({
-        token: '',
-        message: 'password do not match',
-      });
-    }
+    jwt.verify(token, user.user_pw);
+
+    const payload = {
+      user_id: user.user_id,
+    };
+    const option = {
+      expiresIn: '60m',
+    };
+    res.json({
+      token: jwt.sign(payload, process.env.SECRET_KEY, option),
+      message: 'login success',
+    });
   } catch (err) {
     res.status(400).json({
       token: '',
-      message: 'id not registered',
+      message: err.toString(),
     });
   }
 };
