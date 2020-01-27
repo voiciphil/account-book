@@ -1,6 +1,6 @@
 module.exports = (seq, dataType) => seq.define('transactions', {
   user_id: {
-    type: dataType.STRING(20),
+    type: dataType.STRING,
     allowNull: false,
   },
   date: {
@@ -8,11 +8,11 @@ module.exports = (seq, dataType) => seq.define('transactions', {
     allowNull: false,
   },
   category: {
-    type: dataType.STRING(45),
+    type: dataType.STRING,
     allowNull: false,
   },
   breakdown: {
-    type: dataType.STRING(100),
+    type: dataType.STRING,
     allowNull: false,
   },
   price: {

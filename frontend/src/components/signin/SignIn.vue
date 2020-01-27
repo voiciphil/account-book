@@ -76,8 +76,6 @@
 </template>
 
 <script>
-import jwt from 'jsonwebtoken';
-
 export default {
   data() {
     return {
@@ -90,14 +88,14 @@ export default {
       try {
         const res = await this.$axios.post('/api/auth/sign-in', {
           id: this.id,
-          token: jwt.sign({}, this.pw),
+          pw: this.pw,
         });
         if (res.data.message === 'login success') {
           localStorage.token = res.data.token;
           this.$router.push('/home');
         }
       } catch (err) {
-        if (err.response.data.message === 'JsonWebTokenError: invalid signature') {
+        if (err.response.data.message === 'password do not match') {
           // eslint-disable-next-line
           alert('비밀번호가 잘못되었습니다.');
           this.pw = '';
