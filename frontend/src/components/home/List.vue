@@ -74,6 +74,7 @@
               >
                 <v-col>
                   <v-date-picker
+                    class="elevation-2"
                     v-model="picker"
                     color="light-green lighten-1"
                   />
@@ -81,30 +82,36 @@
                 <v-col class="mr-3">
                   <v-row
                     class="mb-4"
+                    align="center"
                   >
                     <v-text-field
                       v-model="category"
                       v-on:keyup.enter="addTransaction"
                       color="light-green lighten-1"
                       outlined
+                      dense
                       label="카테고리"
                     />
                   </v-row>
                   <v-row
                     class="my-4"
+                    align="center"
                   >
                     <v-text-field
                       v-model="breakdown"
                       v-on:keyup.enter="addTransaction"
                       color="light-green lighten-1"
                       outlined
+                      dense
                       label="내역"
                     />
                   </v-row>
                   <v-row
                     class="my-4"
+                    align="center"
                   >
                     <v-switch
+                      class="mt-n1"
                       v-model="mode"
                       inset
                       color="light-green lighten-1"
@@ -115,30 +122,31 @@
                       v-model="price"
                       type="number"
                       color="light-green lighten-1"
+                      dense
                       outlined
                     />
                   </v-row>
                   <v-row
-                    class="mt-4"
-                    justify="center"
+                    class="mt-8"
                   >
-                    <v-col>
-                      <v-btn
-                        v-on:click="dialog = false"
-                        class="mr-2"
-                        color="light-green lighten-1"
-                        block
-                        dark
-                      >취소</v-btn>
-                    </v-col>
-                    <v-col>
-                      <v-btn
-                        v-on:click="addTransaction"
-                        color="light-green lighten-1"
-                        block
-                        dark
-                      >확인</v-btn>
-                    </v-col>
+                    <v-btn
+                      v-on:click="addTransaction"
+                      color="light-green lighten-1"
+                      block
+                      depressed
+                      dark
+                    >확인</v-btn>
+                  </v-row>
+                  <v-row
+                    class="mt-3"
+                  >
+                    <v-btn
+                      v-on:click="dialog = false"
+                      color="light-green lighten-1"
+                      block
+                      depressed
+                      dark
+                    >취소</v-btn>
                   </v-row>
                 </v-col>
               </v-row>
@@ -158,6 +166,7 @@
               >
                 <v-col>
                   <v-date-picker
+                    class="elevation-2"
                     v-model="editedItem.date"
                     color="light-green lighten-1"
                   />
@@ -167,30 +176,36 @@
                 >
                   <v-row
                     class="mb-4"
+                    align="center"
                   >
                     <v-text-field
                       v-model="editedItem.category"
                       v-on:keyup.enter="editTransaction"
                       color="light-green lighten-1"
                       outlined
+                      dense
                       label="카테고리"
                     />
                   </v-row>
                   <v-row
                     class="my-4"
+                    align="center"
                   >
                     <v-text-field
                       v-model="editedItem.breakdown"
                       v-on:keyup.enter="editTransaction"
                       color="light-green lighten-1"
                       outlined
+                      dense
                       label="내역"
                     />
                   </v-row>
                   <v-row
                     class="my-4"
+                    align="center"
                   >
                     <v-switch
+                      class="mt-n1"
                       v-model="mode"
                       inset
                       color="light-green lighten-1"
@@ -201,30 +216,31 @@
                       v-model="editedItem.price"
                       type="number"
                       color="light-green lighten-1"
+                      dense
                       outlined
                     />
                   </v-row>
                   <v-row
-                    class="mt-4"
-                    justify="end"
+                    class="mt-8"
                   >
-                    <v-col>
-                      <v-btn
-                        v-on:click="editDialog = mode = false"
-                        class="mr-2"
-                        color="light-green lighten-1"
-                        block
-                        dark
-                      >취소</v-btn>
-                    </v-col>
-                    <v-col>
-                      <v-btn
-                        v-on:click="editTransaction"
-                        color="light-green lighten-1"
-                        block
-                        dark
-                      >확인</v-btn>
-                    </v-col>
+                    <v-btn
+                      v-on:click="editTransaction"
+                      color="light-green lighten-1"
+                      block
+                      dark
+                      depressed
+                    >확인</v-btn>
+                  </v-row>
+                  <v-row
+                    class="mt-3"
+                  >
+                    <v-btn
+                      v-on:click="editDialog = mode = false"
+                      color="light-green lighten-1"
+                      block
+                      dark
+                      depressed
+                    >취소</v-btn>
                   </v-row>
                 </v-col>
               </v-row>
