@@ -92,7 +92,7 @@ exports.update = async (req, res) => {
   const { id } = req.params;
 
   try {
-    jwt.verify(token, process.env.SECRET_KEY);
+    const payload = jwt.verify(token, process.env.SECRET_KEY);
     await db.transactions.update({
       date,
       category,
@@ -101,6 +101,7 @@ exports.update = async (req, res) => {
     }, {
       where: {
         id,
+        user_id: payload.user_id,
       },
     });
 
