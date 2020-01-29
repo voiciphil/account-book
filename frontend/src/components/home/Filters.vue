@@ -74,7 +74,7 @@ export default {
   },
   methods: {
     async getCategories() {
-      const res = await this.$axios.get('/api/transactions/category', {
+      const res = await this.$axios.get('/api/transactions/categories', {
         headers: {
           'x-access-token': localStorage.token,
         },

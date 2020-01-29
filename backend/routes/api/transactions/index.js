@@ -17,7 +17,7 @@ router.patch('/:id', (req, res) => {
   controller.transactions.update(req, res);
 });
 
-router.get('/category', (req, res) => {
+router.get('/categories', (req, res) => {
   controller.transactions.category(req, res);
 });
 
