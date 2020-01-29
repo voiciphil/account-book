@@ -67,10 +67,11 @@ exports.delete = async (req, res) => {
   const { id } = req.params;
 
   try {
-    jwt.verify(token, process.env.SECRET_KEY);
+    const payload = jwt.verify(token, process.env.SECRET_KEY);
     await db.transactions.destroy({
       where: {
         id: parseInt(id, 10),
+        user_id: payload.user_id,
       },
     });
     res.json({
