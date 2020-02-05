@@ -13,7 +13,7 @@ router.delete('/:id', (req, res) => {
   controller.transactions.delete(req, res);
 });
 
-router.patch('/:id', (req, res) => {
+router.put('/:id', (req, res) => {
   controller.transactions.update(req, res);
 });
 
